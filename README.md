@@ -25,6 +25,9 @@ Après une modification de CSS ou JS, augmentez le numéro `?v=` dans les trois 
 ## Vidéo de l'accueil
 `assets/video/hero.mp4` (1280×720, 25 s, sans son) est un montage des photos du terrain. Pour utiliser une vraie vidéo du concessionnaire, remplacez ce fichier (MP4 H.264, idéalement moins de 5 Mo) et `assets/video/hero-poster.webp` (image affichée pendant le chargement et en mode « mouvement réduit »).
 
+## Témoignages (exemples)
+Le composant `assets/js/temoignages.js` s'affiche sur l'accueil et en bas de l'inventaire (conteneur `data-temoignages`). **Les six témoignages sont des exemples de démonstration** (photos d'illustration dans `assets/img/avatars/`) : avant la mise en ligne publique, les remplacer par de vrais avis clients, avec leur accord.
+
 ## Formulaire
 Le formulaire ouvre WhatsApp (450 378-0888) avec le message prérempli : aucun serveur requis.
 
