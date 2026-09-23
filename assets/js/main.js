@@ -184,6 +184,28 @@
   });
   form.querySelectorAll('input').forEach((i) => i.addEventListener('input', () => i.classList.remove('is-invalid')));
 
+  /* ---------- Video del hero: pausa manual y fuera de pantalla ---------- */
+  const video = document.querySelector('[data-hero-video]');
+  const pauseBtn = document.querySelector('[data-hero-pause]');
+  let userPaused = reduced;
+  const syncPause = () => {
+    pauseBtn.setAttribute('aria-pressed', userPaused);
+    pauseBtn.setAttribute('aria-label', userPaused ? 'Lire la vidéo' : 'Mettre la vidéo en pause');
+  };
+  if (reduced) { video.removeAttribute('autoplay'); video.pause(); }
+  syncPause();
+  pauseBtn.addEventListener('click', () => {
+    userPaused = !userPaused;
+    if (userPaused) video.pause(); else video.play().catch(() => {});
+    syncPause();
+  });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => {
+      if (userPaused) return;
+      if (entry.isIntersecting) video.play().catch(() => {}); else video.pause();
+    }, { threshold: 0.05 }).observe(video);
+  }
+
   /* ---------- Marquesina continua ---------- */
   document.querySelectorAll('[data-marquee]').forEach((track) => {
     const list = track.firstElementChild;
@@ -203,13 +225,13 @@
   /* ---------- Loader + entrada del hero ---------- */
   const heroIntro = () => {
     const tl = gsap.timeline({ onComplete: startRail });
-    tl.fromTo('[data-hero-media] > img', { scale: 1.14 }, { scale: 1, duration: 2.2, ease: 'expo.out' }, 0)
+    tl.fromTo('[data-hero-video]', { scale: 1.14 }, { scale: 1, duration: 2.2, ease: 'expo.out' }, 0)
       .to('[data-hero-line]', { y: 0, yPercent: 0, duration: 1.2, ease: 'expo.out', stagger: 0.12 }, 0.15)
       .from('.hero__chips li', { opacity: 0, y: 12, duration: 0.8, ease: 'power3.out', stagger: 0.06 }, 0.6)
       .from('.site-header > *', { opacity: 0, y: -12, duration: 0.8, ease: 'power3.out', stagger: 0.06 }, 0.3)
       .from('.hero-rail', { opacity: 0, y: 24, duration: 1, ease: 'power3.out' }, 0.7)
       .from('.hero__cta-sm', { opacity: 0, y: 16, duration: 0.8, ease: 'power3.out' }, 0.8)
-      .to('[data-reveal-late]', { opacity: 1, duration: 0.8, stagger: 0.2 }, 1.2);
+      .from('.hero__pause', { opacity: 0, duration: 0.8 }, 0.9);
   };
   gsap.set('[data-hero-line]', { y: 0, yPercent: 110 });
 

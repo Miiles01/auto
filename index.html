@@ -8,12 +8,12 @@
   <meta name="theme-color" content="#0c110e">
   <meta property="og:title" content="Vaporax — Esthétique auto · pneus · antirouille">
   <meta property="og:description" content="Antirouille + pose de pneus en une seule visite : 199,95 $ + taxes. 1297, rue Principale, Granby.">
-  <meta property="og:image" content="assets/img/photos/hero.webp">
+  <meta property="og:image" content="assets/img/photos/hero-poster.webp">
   <link rel="icon" type="image/svg+xml" href="assets/img/isotipo-vaporax.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css?v=1">
+  <link rel="stylesheet" href="assets/css/styles.css?v=2">
   <script>
     document.documentElement.classList.add('js');
     try { if (sessionStorage.getItem('vx-loaded') === '1') document.documentElement.classList.add('is-loaded'); } catch (e) {}
@@ -118,18 +118,11 @@
               <!-- Hero -->
               <section class="hero" aria-labelledby="hero-title">
                 <div class="hero__media" data-hero-media>
-                  <img src="assets/img/photos/hero.webp" alt="Voiture couverte de mousse dans une baie de lavage éclairée" fetchpriority="high">
-                  <!-- Hotspots sobre la foto -->
-                  <div class="hero-hotspot" style="--x:47.5%;--y:37%" data-reveal-late>
-                    <span class="hero-hotspot__dot"></span>
-                    <span class="hero-hotspot__leader"></span>
-                    <span class="hero-hotspot__label"><strong>Lavage à la mousse</strong><span>Prélavage qui décolle sel et calcium</span></span>
-                  </div>
-                  <div class="hero-hotspot hero-hotspot--wide" style="--x:17%;--y:75%" data-reveal-late>
-                    <span class="hero-hotspot__dot"></span>
-                    <span class="hero-hotspot__leader"></span>
-                    <span class="hero-hotspot__label"><strong>Bas de caisse</strong><span>Antirouille contre le sel</span></span>
-                  </div>
+                  <!-- Video: Pexels 6161372 «Shiny black car» (licencia Pexels) -->
+                  <video class="hero__video" data-hero-video autoplay muted loop playsinline preload="auto" poster="assets/img/photos/hero-poster.webp" aria-hidden="true">
+                    <source src="assets/video/hero-720.mp4" type="video/mp4" media="(max-width: 1023px)">
+                    <source src="assets/video/hero-1080.mp4" type="video/mp4">
+                  </video>
                 </div>
                 <div class="hero__scrim" aria-hidden="true"></div>
 
@@ -138,6 +131,11 @@
                     <span class="hero__line"><span data-hero-line>Prête pour l’hiver,</span></span>
                     <span class="hero__line hero__line--muted"><span data-hero-line>avant la slush.</span></span>
                   </h1>
+                  <div class="hero__bottom">
+                  <button class="hero__pause" type="button" data-hero-pause aria-label="Mettre la vidéo en pause" aria-pressed="false">
+                    <svg class="icon icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg>
+                    <svg class="icon icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5Z"/></svg>
+                  </button>
                   <ul class="hero__chips" aria-label="Nos services">
                     <li class="chip chip--glass">Lavage</li>
                     <li class="chip chip--glass">Esthétique auto</li>
@@ -145,6 +143,7 @@
                     <li class="chip chip--glass">Antirouille</li>
                     <li class="chip chip--glass">Unité mobile</li>
                   </ul>
+                  </div>
                 </div>
 
                 <!-- Rail de trabajos -->
@@ -540,6 +539,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
-  <script src="assets/js/main.js?v=1"></script>
+  <script src="assets/js/main.js?v=2"></script>
 </body>
 </html>
