@@ -6,7 +6,7 @@
   var hasGsap = typeof window.gsap !== "undefined";
   var motion = hasGsap && !PC.reduceMotion;
 
-  var byYear = cars.slice().sort(function (a, b) { return b.year - a.year || b.id - a.id; });
+  var byYear = cars.slice().sort(function (a, b) { return (b.featured ? 1 : 0) - (a.featured ? 1 : 0) || b.year - a.year || b.id - a.id; });
   var isAwd = function (c) { return /AWD|4x4/i.test(c.drivetrain); };
   var CATS = [
     { key: "all", label: "Tous les véhicules", href: "inventaire.html", test: function () { return true; } },

@@ -58,7 +58,11 @@
   body.innerHTML =
     '<header class="vd__head">' +
       '<h1 class="vd__title display"><small>' + esc(PC.BODY[car.body]) + " · " + car.year + " · " + esc(car.location) + "</small>" + esc(name) + "</h1>" +
-      '<div class="vd__price"><b class="tabular">' + PC.priceHTML(car.price) + '</b><span data-cur-note="' + car.price + '"></span><span>Stock ' + esc(car.stock) + "</span></div>" +
+      '<div class="vd__price">' +
+        (car.status === "reserved" ? '<span class="vd__badge vd__badge--reserved">Réservé</span>' : (car.compareAt > car.price ? '<span class="vd__badge">Prix réduit</span>' : "")) +
+        '<b class="tabular">' + PC.priceHTML(car.price) + "</b>" +
+        (car.compareAt > car.price ? '<s class="vd__was">' + PC.priceHTML(car.compareAt) + "</s>" : "") +
+        '<span data-cur-note="' + car.price + '"></span><span>Stock ' + esc(car.stock) + "</span></div>" +
     "</header>" +
     '<div class="vd__layout">' +
       '<div class="vd__main">' +
@@ -91,11 +95,13 @@
         "</dl>" +
         '<div class="panel panel--cta">' +
           "<h2>Ce véhicule vous intéresse ?</h2>" +
-          "<p>Il se trouve à notre succursale de " + esc(car.location) + ". Écrivez-nous ou appelez pour réserver votre essai routier.</p>" +
+          (car.status === "reserved"
+            ? "<p>Ce véhicule est actuellement réservé. Écrivez-nous pour être sur la liste d\u2019attente ou découvrir un modèle similaire.</p>"
+            : "<p>Il se trouve à notre succursale de " + esc(car.location) + ". Écrivez-nous ou appelez pour réserver votre essai routier.</p>") +
           '<div class="panel__actions">' +
-            '<a class="btn btn--wa btn--lg" href="' + PC.waLink(interest) + '" target="_blank" rel="noopener">' + icons.whatsapp + "Je suis intéressé(e)</a>" +
-            '<a class="btn btn--red btn--lg" href="' + PC.waLink(testDrive) + '" target="_blank" rel="noopener">Réserver un essai routier ' + icons.arrow + "</a>" +
-            '<a class="btn btn--ghost-light btn--lg" href="tel:+14503780888">' + icons.phone + "450 378-0888</a>" +
+            '<a class="btn btn--wa btn--lg" data-lead="Intérêt (WhatsApp)" href="' + PC.waLink(interest) + '" target="_blank" rel="noopener">' + icons.whatsapp + "Je suis intéressé(e)</a>" +
+            '<a class="btn btn--red btn--lg" data-lead="Essai routier (WhatsApp)" href="' + PC.waLink(testDrive) + '" target="_blank" rel="noopener">Réserver un essai routier ' + icons.arrow + "</a>" +
+            '<a class="btn btn--ghost-light btn--lg" data-lead="Appel" href="tel:+14503780888">' + icons.phone + "450 378-0888</a>" +
           "</div>" +
         "</div>" +
         '<div class="panel">' +
@@ -105,13 +111,23 @@
             '<div class="calc__row"><span style="font-size:.875rem">Terme</span><div class="calc__terms" role="group" aria-label="Terme du financement">' +
               [36, 48, 60, 72].map(function (t) { return '<button class="pill" type="button" data-term="' + t + '" aria-pressed="' + (t === 60) + '">' + t + " mois</button>"; }).join("") +
             "</div></div>" +
-            '<div class="calc__row"><label for="c-rate"><span>Taux annuel estimé</span><output data-c-rate-out></output></label><input id="c-rate" type="range" min="2.99" max="24.99" step="0.5" value="9.99"></div>' +
+            '<div class="calc__row"><label for="c-rate"><span>Taux annuel estimé</span><output data-c-rate-out></output></label><input id="c-rate" type="range" min="2.99" max="24.99" step="0.5" value="' + ((window.PC_SETTINGS && window.PC_SETTINGS.defaultRate) || 9.99) + '"></div>' +
             '<div class="calc__result"><span>Paiement par semaine<br><small style="color:var(--fg-muted)" data-c-month></small></span><b data-c-week></b></div>' +
             '<p class="calc__note">Estimation à titre indicatif seulement, taxes et frais en sus. Le taux réel dépend de votre dossier de crédit. <a href="#contact" class="link-underline" style="color:var(--accent-strong)">Demandez votre approbation</a>.</p>' +
           "</div>" +
         "</div>" +
       "</aside>" +
     "</div>";
+
+  /* Chaque clic sur un bouton de contact est consigné comme demande dans l'admin */
+  body.addEventListener("click", function (e) {
+    var a = e.target.closest("[data-lead]");
+    if (!a || !window.PCStore) { return; }
+    window.PCStore.addLead({
+      source: a.getAttribute("data-lead"), nom: "Visiteur du site", telephone: "", courriel: "",
+      sujet: a.getAttribute("data-lead"), carId: car.id, vehicule: full, message: ""
+    });
+  });
 
   /* Où voir le véhicule */
   document.querySelector("[data-vd-where]").innerHTML =

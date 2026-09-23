@@ -108,6 +108,13 @@
     update(true);
   });
 
+  var prepEl = document.querySelector("[data-prep-text]");
+  if (prepEl) {
+    var prep = (window.PC_SETTINGS && window.PC_SETTINGS.prepCount) || 0;
+    var words = ["Aucun véhicule n\u2019est", "Un véhicule est", "Deux véhicules sont", "Trois véhicules sont", "Quatre véhicules sont", "Cinq véhicules sont", "Six véhicules sont", "Sept véhicules sont", "Huit véhicules sont", "Neuf véhicules sont", "Dix véhicules sont"];
+    prepEl.textContent = words[prep] || prep + " véhicules sont";
+  }
+
   render(false);
   PC.initCommon();
 })();

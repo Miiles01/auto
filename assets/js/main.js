@@ -67,26 +67,33 @@
 
   var renderCard = function (c, i) {
     var second = c.thumbs[3] || c.thumbs[1] || c.thumbs[0];
+    var reduced = c.compareAt && c.compareAt > c.price;
+    var badge = c.status === "reserved" ? '<span class="car-card__badge car-card__badge--reserved">Réservé</span>'
+      : reduced ? '<span class="car-card__badge">Prix réduit</span>' : "";
     return (
-      '<article class="car-card" data-cursor="Voir">' +
+      '<article class="car-card' + (c.status === "reserved" ? " is-reserved" : "") + '" data-cursor="Voir">' +
       '<div class="car-card__media">' +
       '<span class="car-card__index">(' + pad(i + 1) + ")</span>" +
-      '<span class="chip car-card__loc">' + icons.pin + esc(c.location) + "</span>" +
+      '<span class="chip car-card__loc">' + icons.pin + esc(c.location) + "</span>" + badge +
       '<img src="' + c.thumbs[0] + '" alt="' + esc(carName(c) + " " + c.year + ", vue avant") + '" width="720" height="498" loading="lazy" decoding="async">' +
       '<img src="' + second + '" alt="" width="720" height="498" loading="lazy" decoding="async">' +
       "</div>" +
       '<h3 class="car-card__title"><a class="car-card__link" href="' + carUrl(c) + '">' + esc(carName(c)) + " <span>" + c.year + "</span></a></h3>" +
       '<p class="car-card__spec">' + fmtKm(c.km) + " · " + esc(c.transmission) + " · " + esc(c.drivetrain) + "</p>" +
-      '<div class="car-card__foot"><span class="car-card__price">' + priceHTML(c.price) + '</span><span class="car-card__more">Détails ' + icons.arrow + "</span></div>" +
+      '<div class="car-card__foot"><span class="car-card__price">' + priceHTML(c.price) +
+      (reduced ? ' <s class="car-card__was">' + priceHTML(c.compareAt) + "</s>" : "") +
+      '</span><span class="car-card__more">Détails ' + icons.arrow + "</span></div>" +
       "</article>"
     );
   };
 
   var renderSoonCard = function () {
+    var prep = (window.PC_SETTINGS && window.PC_SETTINGS.prepCount) || 0;
+    if (prep < 1) { return ""; }
     return (
       '<article class="car-card car-card--soon">' +
       '<div class="car-card__media"><img src="assets/img/en-preparation.webp" alt="Véhicule sous une housse, en préparation" width="474" height="266" loading="lazy"><span class="soon-label">Bientôt en inventaire</span></div>' +
-      '<h3 class="car-card__title">5 véhicules <span>en préparation</span></h3>' +
+      '<h3 class="car-card__title">' + prep + (prep > 1 ? " véhicules" : " véhicule") + " <span>en préparation</span></h3>" +
       '<p class="car-card__spec">Inspection et esthétique en cours. Écrivez-nous pour être le premier informé.</p>' +
       '<div class="car-card__foot"><a class="car-card__more car-card__link" href="' + waLink("Bonjour PC Auto, j'aimerais être informé(e) des prochains véhicules disponibles.") + '" target="_blank" rel="noopener">M’aviser ' + icons.arrow + "</a></div>" +
       "</article>"
@@ -336,6 +343,14 @@
       if (car) { lines.push("Véhicule : " + carName(car) + " " + car.year + " (stock " + car.stock + ", " + fmtCAD(car.price) + ")"); }
       if (d.get("sujet")) { lines.push("Sujet : " + d.get("sujet")); }
       if (d.get("message")) { lines.push("", String(d.get("message"))); }
+      if (window.PCStore) {
+        window.PCStore.addLead({
+          source: "Formulaire", nom: String(d.get("nom")), telephone: String(d.get("telephone")),
+          courriel: String(d.get("courriel")), sujet: String(d.get("sujet") || ""),
+          carId: car ? car.id : null, vehicule: car ? carName(car) + " " + car.year : "",
+          message: String(d.get("message") || "")
+        });
+      }
       window.open(waLink(lines.join("\n")), "_blank", "noopener");
       if (status) {
         status.textContent = "Merci " + String(d.get("nom")).split(" ")[0] + " ! WhatsApp s’est ouvert avec votre message : il ne reste qu’à l’envoyer. Vous pouvez aussi nous appeler au " + PHONE_DISPLAY + ".";
