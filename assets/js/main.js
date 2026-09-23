@@ -3,7 +3,6 @@
   const root = document.documentElement;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const hasGsap = typeof window.gsap !== 'undefined';
-  const WHATSAPP = '14503780888';
 
   if (hasGsap) gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -155,7 +154,7 @@
   }));
   document.addEventListener('click', () => closeHotspots());
 
-  /* ---------- Formulario → WhatsApp ---------- */
+  /* ---------- Formulario (sin destino todavía: confirma por teléfono) ---------- */
   const form = document.querySelector('[data-request-form]');
   const note = form.querySelector('[data-form-note]');
   const noteDefault = note.textContent;
@@ -168,21 +167,19 @@
     form.tel.classList.toggle('is-invalid', tel.replace(/\D/g, '').length < 10);
     if (!nom || tel.replace(/\D/g, '').length < 10) {
       note.textContent = 'Indiquez votre nom et un numéro de téléphone valide';
+      note.classList.remove('is-sent');
       note.classList.add('is-error');
       return;
     }
-    note.textContent = noteDefault;
+    // TODO: conectar el envío (Web3Forms u otro) cuando el cliente dé un correo de destino
     note.classList.remove('is-error');
-    const lines = [
-      'Bonjour Vaporax, j’aimerais réserver un rendez-vous.',
-      `Nom : ${nom}`,
-      `Téléphone : ${tel}`,
-      data.get('vehicule') ? `Véhicule : ${data.get('vehicule').trim()}` : '',
-      `Service : ${data.get('service')}`,
-    ].filter(Boolean);
-    window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP}&text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener');
+    note.classList.add('is-sent');
+    note.innerHTML = `Merci, ${nom.replace(/[<>&"]/g, '')}! Pour confirmer votre place, appelez-nous au <a href="tel:+14503780888">450 378-0888</a>.`;
   });
-  form.querySelectorAll('input').forEach((i) => i.addEventListener('input', () => i.classList.remove('is-invalid')));
+  form.querySelectorAll('input').forEach((i) => i.addEventListener('input', () => {
+    i.classList.remove('is-invalid');
+    if (note.classList.contains('is-sent')) { note.classList.remove('is-sent'); note.textContent = noteDefault; }
+  }));
 
   /* ---------- Video del hero: pausa manual y fuera de pantalla ---------- */
   const video = document.querySelector('[data-hero-video]');
