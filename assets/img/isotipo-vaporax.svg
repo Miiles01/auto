@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="40 -4 460 436" role="img" aria-label="Vaporax">
+  <defs><linearGradient id="vg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5eab5c"/><stop offset="1" stop-color="#3a8a4c"/></linearGradient></defs>
+  <path d="M57 82 L163 4 L245 100 L180 104 L275 272 L370 104 L305 100 L387 4 L493 82 L275 425 Z" fill="#000" transform="translate(-8 6)"/>
+  <path d="M57 82 L163 4 L245 100 L180 104 L275 272 L370 104 L305 100 L387 4 L493 82 L275 425 Z" fill="url(#vg)"/>
+</svg>

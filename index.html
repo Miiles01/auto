@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Vaporax — Esthétique auto, pneus et antirouille à Granby</title>
+  <meta name="description" content="Vaporax à Granby : esthétique auto, pose de pneus, traitement antirouille et unité mobile de lavage à domicile. Le duo hiver antirouille + pneus à 199,95 $ + taxes.">
+  <meta name="theme-color" content="#0c110e">
+  <meta property="og:title" content="Vaporax — Esthétique auto · pneus · antirouille">
+  <meta property="og:description" content="Antirouille + pose de pneus en une seule visite : 199,95 $ + taxes. 1297, rue Principale, Granby.">
+  <meta property="og:image" content="assets/img/photos/hero.webp">
+  <link rel="icon" type="image/svg+xml" href="assets/img/isotipo-vaporax.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css?v=1">
+  <script>
+    document.documentElement.classList.add('js');
+    try { if (sessionStorage.getItem('vx-loaded') === '1') document.documentElement.classList.add('is-loaded'); } catch (e) {}
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('is-loaded');
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoWash",
+    "name": "Vaporax",
+    "description": "Esthétique auto, pneus, antirouille et unité mobile de lavage à domicile.",
+    "telephone": "+1-450-378-0888",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1297, rue Principale",
+      "addressLocality": "Granby",
+      "addressRegion": "QC",
+      "addressCountry": "CA"
+    },
+    "sameAs": ["https://www.instagram.com/vaporax_inc/"]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Loader: solo en la primera visita de la sesión -->
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader__center">
+      <img class="preloader__mark" src="assets/img/isotipo-vaporax.svg" alt="" width="64" height="61">
+      <p class="preloader__name">Vaporax · esthétique auto</p>
+      <div class="preloader__progress">
+        <span class="preloader__count">000</span>
+        <span class="preloader__track"><span class="preloader__bar"></span></span>
+      </div>
+    </div>
+    <p class="preloader__wordmark">Vaporax</p>
+  </div>
+
+  <!-- Header fijo (fuera de ScrollSmoother) -->
+  <header class="site-header" data-header>
+    <a class="site-header__logo" href="#top" aria-label="Vaporax, retour en haut">
+      <img src="assets/img/isotipo-vaporax.svg" alt="" width="26" height="25">
+    </a>
+    <nav class="site-header__nav" aria-label="Navigation principale">
+      <span class="site-header__pill" aria-hidden="true"></span>
+      <a href="#top" class="is-active">Accueil</a>
+      <a href="#services">Services</a>
+      <a href="#duo-hiver">Duo hiver</a>
+      <a href="#processus">Processus</a>
+      <a href="#realisations">Réalisations</a>
+    </nav>
+    <a class="pill-button pill-button--light site-header__cta" href="#reserver">
+      <span class="pill-button__labels">
+        <span>Réserver</span>
+        <span aria-hidden="true">199,95&nbsp;$ · duo hiver</span>
+      </span>
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+    </a>
+    <button class="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-panel"><span></span><span></span></button>
+  </header>
+
+  <!-- Menú móvil (componente MOSS del repo ideas) -->
+  <div class="menu-overlay" data-menu-close></div>
+  <nav class="menu-panel" id="menu-panel" aria-hidden="true" aria-label="Menu mobile">
+    <ul class="menu-panel__links">
+      <li><a class="menu-panel__item" href="#top" style="--i:0" data-label="Accueil">Accueil</a></li>
+      <li><a class="menu-panel__item" href="#services" style="--i:1" data-label="Services">Services</a></li>
+      <li><a class="menu-panel__item" href="#duo-hiver" style="--i:2" data-label="Duo hiver">Duo hiver</a></li>
+      <li><a class="menu-panel__item" href="#processus" style="--i:3" data-label="Processus">Processus</a></li>
+      <li><a class="menu-panel__item" href="#realisations" style="--i:4" data-label="Réalisations">Réalisations</a></li>
+      <li><a class="menu-panel__item" href="#reserver" style="--i:5" data-label="Réserver">Réserver</a></li>
+    </ul>
+    <div class="menu-panel__foot">
+      <a href="tel:+14503780888">450 378-0888</a>
+      <span>1297, rue Principale, Granby</span>
+    </div>
+  </nav>
+
+  <a class="whatsapp-fab" href="https://api.whatsapp.com/send?phone=14503780888&text=Bonjour%20Vaporax%2C%20j%E2%80%99aimerais%20r%C3%A9server%20un%20rendez-vous." target="_blank" rel="noopener" aria-label="Écrire à Vaporax sur WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 2.1 17.6L.5 23.5l6-1.6a11.8 11.8 0 0 0 5.6 1.4 11.8 11.8 0 0 0 8.4-19.8Zm-8.4 18.1a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.6.9 1-3.5-.2-.4a9.8 9.8 0 1 1 8.2 4.6Zm5.4-7.3c-.3-.2-1.8-.9-2-1s-.5-.2-.7.1-.8 1-.9 1.2-.3.2-.6.1a8 8 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1 13.5 13.5 0 0 0 5.2 4.6c1.9.8 2.7.9 3.6.8a3.1 3.1 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.2-.3-.3-.6-.4Z"/></svg>
+  </a>
+
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+      <div class="page-field" id="top">
+        <div class="page-card">
+          <div class="page-well">
+
+            <!-- Barra de estado -->
+            <div class="status-bar">
+              <p class="status-bar__left">
+                <span class="status-bar__wide">Granby, Québec</span>
+                <span class="status-bar__sep status-bar__wide" aria-hidden="true">\</span>
+                <span class="status-bar__live"><span class="live-dot" aria-hidden="true"></span>Unité mobile<span class="status-bar__wide">sur la route</span></span>
+                <span class="status-bar__sep status-bar__wide" aria-hidden="true">\</span>
+                <span class="status-bar__wide">Saison des pneus d’hiver</span>
+              </p>
+              <p class="status-bar__right"><a href="tel:+14503780888">450 378-0888</a></p>
+            </div>
+
+            <main>
+              <!-- Hero -->
+              <section class="hero" aria-labelledby="hero-title">
+                <div class="hero__media" data-hero-media>
+                  <img src="assets/img/photos/hero.webp" alt="Voiture couverte de mousse dans une baie de lavage éclairée" fetchpriority="high">
+                  <!-- Hotspots sobre la foto -->
+                  <div class="hero-hotspot" style="--x:47.5%;--y:37%" data-reveal-late>
+                    <span class="hero-hotspot__dot"></span>
+                    <span class="hero-hotspot__leader"></span>
+                    <span class="hero-hotspot__label"><strong>Lavage à la mousse</strong><span>Prélavage qui décolle sel et calcium</span></span>
+                  </div>
+                  <div class="hero-hotspot hero-hotspot--wide" style="--x:17%;--y:75%" data-reveal-late>
+                    <span class="hero-hotspot__dot"></span>
+                    <span class="hero-hotspot__leader"></span>
+                    <span class="hero-hotspot__label"><strong>Bas de caisse</strong><span>Antirouille contre le sel</span></span>
+                  </div>
+                </div>
+                <div class="hero__scrim" aria-hidden="true"></div>
+
+                <div class="hero__content">
+                  <h1 class="hero__title" id="hero-title">
+                    <span class="hero__line"><span data-hero-line>Prête pour l’hiver,</span></span>
+                    <span class="hero__line hero__line--muted"><span data-hero-line>avant la slush.</span></span>
+                  </h1>
+                  <ul class="hero__chips" aria-label="Nos services">
+                    <li class="chip chip--glass">Lavage</li>
+                    <li class="chip chip--glass">Esthétique auto</li>
+                    <li class="chip chip--glass">Pneus</li>
+                    <li class="chip chip--glass">Antirouille</li>
+                    <li class="chip chip--glass">Unité mobile</li>
+                  </ul>
+                </div>
+
+                <!-- Rail de trabajos -->
+                <div class="hero-rail" data-rail>
+                  <div class="hero-rail__progress">
+                    <span data-rail-index>01</span>
+                    <span class="hero-rail__track"><span class="hero-rail__thumb" data-rail-thumb></span></span>
+                    <span>03</span>
+                  </div>
+                  <div class="hero-rail__viewport">
+                    <div class="hero-rail__list" data-rail-list>
+                      <a class="job-card" href="#duo-hiver">
+                        <img src="assets/img/photos/rail-pneus.webp" alt="Technicien qui serre une roue avec une clé à chocs" loading="lazy">
+                        <span class="job-card__text"><strong>Le duo hiver</strong><span>Antirouille + pneus — 199,95&nbsp;$</span></span>
+                      </a>
+                      <a class="job-card" href="#services">
+                        <img src="assets/img/photos/rail-mousse.webp" alt="Mousse projetée sur une voiture noire" loading="lazy">
+                        <span class="job-card__text"><strong>Unité mobile</strong><span>Lavage à domicile, sur rendez-vous</span></span>
+                      </a>
+                      <a class="job-card" href="#services">
+                        <img src="assets/img/photos/rail-antirouille.webp" alt="Technicien sous un véhicule surélevé" loading="lazy">
+                        <span class="job-card__text"><strong>Antirouille</strong><span>Dessous de caisse, portes et ailes</span></span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <a class="pill-button pill-button--light hero__cta-sm" href="#reserver">
+                  <span class="pill-button__labels"><span>Réserver votre place</span><span aria-hidden="true">199,95&nbsp;$ · duo hiver</span></span>
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                </a>
+              </section>
+
+              <!-- (01) À propos -->
+              <section class="about" id="a-propos" data-about-pin>
+                <div class="about__inner">
+                  <div class="statement">
+                    <p class="eyebrow"><span>(01)</span> À propos</p>
+                    <p class="statement__text" data-statement>
+                      <span>Chez Vaporax, on </span><strong>lave, protège et chausse votre auto</strong><span> au même endroit, à Granby. Antirouille, pneus d’hiver, esthétique : </span><strong>tout se règle en une seule visite</strong><span>, ou chez vous avec l’unité mobile.</span>
+                    </p>
+                  </div>
+                  <div class="about__foot">
+                    <ul class="stats">
+                      <li class="stat"><span class="stat__value" data-odometer="199">199</span><span class="stat__label">$ pour le<br>duo hiver</span></li>
+                      <li class="stat"><span class="stat__value" data-odometer="1">1</span><span class="stat__label">seule visite,<br>tout inclus</span></li>
+                      <li class="stat"><span class="stat__value" data-odometer="3">3</span><span class="stat__label">métiers sous<br>un même toit</span></li>
+                      <li class="stat"><span class="stat__value" data-odometer="0">0</span><span class="stat__label">déplacement avec<br>l’unité mobile</span></li>
+                    </ul>
+                    <div class="marks">
+                      <p class="marks__title">Ce qu’on fait</p>
+                      <div class="marks__track" data-marquee>
+                        <ul class="marks__list">
+                          <li>Lavage intérieur et extérieur</li>
+                          <li>Esthétique auto</li>
+                          <li>Traitement antirouille</li>
+                          <li>Pose de pneus</li>
+                          <li>Lavage à domicile</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- (02) Services -->
+              <section class="services" id="services">
+                <header class="section-head">
+                  <p class="eyebrow"><span>(02)</span> Services</p>
+                  <h2 class="section-head__title" data-split><span>Quatre services,</span><span class="is-muted">un seul rendez-vous.</span></h2>
+                  <p class="section-head__aside">Vous ne voyez pas ce qu’il vous faut? Appelez-nous, on vous dira franchement si on peut le faire.</p>
+                </header>
+
+                <div class="service-grid">
+                  <article class="service-card" data-reveal>
+                    <div class="service-card__media"><img src="assets/img/photos/service-esthetique.webp" alt="Esthéticien qui polit la carrosserie d’une voiture noire" loading="lazy"></div>
+                    <div class="service-card__body">
+                      <h3>Esthétique auto</h3>
+                      <p>Lavage intérieur et extérieur, polissage et cire. On enlève le calcium des tapis et le film gris sur la peinture, pas juste la poussière.</p>
+                      <p class="service-card__note">Intérieur et extérieur</p>
+                    </div>
+                  </article>
+                  <article class="service-card" data-reveal>
+                    <div class="service-card__media"><img src="assets/img/photos/service-antirouille.webp" alt="Dessous d’une voiture moderne avec le système d’échappement" loading="lazy"></div>
+                    <div class="service-card__body">
+                      <h3>Traitement antirouille</h3>
+                      <p>Le sel et la slush attaquent d’abord ce qu’on ne voit pas : dessous de caisse, bas de portes, ailes. C’est là qu’on applique la protection.</p>
+                      <p class="service-card__note">Contre le sel et la slush</p>
+                    </div>
+                  </article>
+                  <article class="service-card" data-reveal>
+                    <div class="service-card__media"><img src="assets/img/photos/service-pneus.webp" alt="Technicien qui installe un pneu dans un garage" loading="lazy"></div>
+                    <div class="service-card__body">
+                      <h3>Pose de pneus</h3>
+                      <p>Pneus d’hiver à l’automne, pneus d’été au printemps. Pression vérifiée et écrous serrés au couple avant que vous repreniez la route.</p>
+                      <p class="service-card__note">Hiver et été</p>
+                    </div>
+                  </article>
+                  <article class="service-card" data-reveal>
+                    <div class="service-card__media"><img src="assets/img/photos/service-mobile.webp" alt="Laveur qui savonne une voiture noire devant un bâtiment" loading="lazy"></div>
+                    <div class="service-card__body">
+                      <h3>Unité mobile à domicile</h3>
+                      <p>Pas le temps de passer? L’unité mobile se rend chez vous ou au bureau et lave l’auto dans votre entrée.</p>
+                      <p class="service-card__note">On se déplace</p>
+                    </div>
+                  </article>
+                </div>
+
+                <div class="checklist">
+                  <p class="checklist__title">Ce que comprend le duo hiver</p>
+                  <ol class="checklist__grid">
+                    <li><span>01</span>Inspection du dessous de caisse</li>
+                    <li><span>02</span>Traitement antirouille complet</li>
+                    <li><span>03</span>Bas de portes et ailes protégés</li>
+                    <li><span>04</span>Démontage des pneus d’été</li>
+                    <li><span>05</span>Pose des pneus d’hiver</li>
+                    <li><span>06</span>Pression et serrage vérifiés</li>
+                  </ol>
+                </div>
+              </section>
+
+              <!-- Duo hiver -->
+              <section class="duo" id="duo-hiver" aria-labelledby="duo-title">
+                <div class="duo__media" data-parallax>
+                  <img src="assets/img/photos/duo-hiver.webp" alt="Voiture noire sur une route enneigée, phares allumés" loading="lazy">
+                </div>
+                <div class="duo__scrim" aria-hidden="true"></div>
+                <div class="duo__content">
+                  <p class="eyebrow eyebrow--on-dark">Offre de saison</p>
+                  <h2 class="duo__title" id="duo-title" data-split><span>Le duo pour</span><span>votre auto.</span></h2>
+                  <p class="duo__combo">
+                    <span>Antirouille</span>
+                    <svg class="duo__plus" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg>
+                    <span>Pose de pneus</span>
+                  </p>
+                  <p class="duo__price"><span class="duo__amount">199,95&nbsp;$</span><span class="duo__tax">+ taxes</span></p>
+                  <p class="duo__body">L’hiver arrive plus vite qu’on pense. On s’occupe des deux en une seule visite. Les places partent vite en saison.</p>
+                  <div class="duo__actions">
+                    <a class="pill-button pill-button--accent" href="#reserver">
+                      <span class="pill-button__labels"><span>Réserver votre rendez-vous</span><span aria-hidden="true">Une seule visite</span></span>
+                      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                    </a>
+                    <a class="duo__phone" href="tel:+14503780888">
+                      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+                      450 378-0888
+                    </a>
+                  </div>
+                </div>
+              </section>
+
+              <!-- (03) Processus -->
+              <section class="process" id="processus">
+                <header class="section-head">
+                  <p class="eyebrow"><span>(03)</span> Processus</p>
+                  <h2 class="section-head__title" data-split><span>Vous déposez l’auto,</span><span class="is-muted">vous repartez prêt.</span></h2>
+                  <p class="section-head__aside">Quatre étapes, toujours dans cet ordre. Le prix est fixé avant qu’on touche à l’auto.</p>
+                </header>
+
+                <div class="steps" data-steps>
+                  <article class="step is-open">
+                    <button class="step__head" type="button" aria-expanded="true" aria-controls="step-1">
+                      <span class="step__index">01</span>
+                      <span class="step__title">La réservation</span>
+                      <span class="step__note">En deux minutes</span>
+                      <svg class="step__arrow icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                    </button>
+                    <div class="step__panel" id="step-1">
+                      <div class="step__inner">
+                        <div class="step__media"><img src="assets/img/photos/step-reservation.webp" alt="Voiture noire dans un paysage enneigé" loading="lazy"></div>
+                        <div class="step__detail">
+                          <p>Un appel, un message WhatsApp ou le formulaire plus bas. On vous propose une plage horaire et on confirme le prix du service choisi, sans surprise.</p>
+                          <dl class="step__facts">
+                            <div><dt>Par téléphone</dt><dd>450 378-0888</dd></div>
+                            <div><dt>Prix</dt><dd>Confirmé d’avance</dd></div>
+                          </dl>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="step">
+                    <button class="step__head" type="button" aria-expanded="false" aria-controls="step-2">
+                      <span class="step__index">02</span>
+                      <span class="step__title">L’inspection</span>
+                      <span class="step__note">Dessous de caisse</span>
+                      <svg class="step__arrow icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                    </button>
+                    <div class="step__panel" id="step-2">
+                      <div class="step__inner">
+                        <div class="step__media"><img src="assets/img/photos/step-accueil.webp" alt="Main gantée qui nettoie une jante à la brosse" loading="lazy"></div>
+                        <div class="step__detail">
+                          <p>L’auto monte sur le pont. On regarde le dessous, les bas de portes et l’état des pneus, et on vous montre ce qu’on voit avant de commencer.</p>
+                          <dl class="step__facts">
+                            <div><dt>On vérifie</dt><dd>Rouille, pneus, jantes</dd></div>
+                            <div><dt>Vous voyez</dt><dd>Tout avant qu’on commence</dd></div>
+                          </dl>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="step">
+                    <button class="step__head" type="button" aria-expanded="false" aria-controls="step-3">
+                      <span class="step__index">03</span>
+                      <span class="step__title">Antirouille et pneus</span>
+                      <span class="step__note">Une seule visite</span>
+                      <svg class="step__arrow icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                    </button>
+                    <div class="step__panel" id="step-3">
+                      <div class="step__inner">
+                        <div class="step__media"><img src="assets/img/photos/step-pneus.webp" alt="Technicien qui serre une roue avec une clé à chocs" loading="lazy"></div>
+                        <div class="step__detail">
+                          <p>Protection appliquée sous l’auto pendant qu’elle est sur le pont, puis changement des pneus. Les écrous sont serrés au couple, la pression ajustée.</p>
+                          <dl class="step__facts">
+                            <div><dt>Antirouille</dt><dd>Dessous, portes, ailes</dd></div>
+                            <div><dt>Pneus</dt><dd>Serrés au couple</dd></div>
+                          </dl>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="step">
+                    <button class="step__head" type="button" aria-expanded="false" aria-controls="step-4">
+                      <span class="step__index">04</span>
+                      <span class="step__title">La remise des clés</span>
+                      <span class="step__note">Auto propre</span>
+                      <svg class="step__arrow icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                    </button>
+                    <div class="step__panel" id="step-4">
+                      <div class="step__inner">
+                        <div class="step__media"><img src="assets/img/photos/step-remise.webp" alt="Chiffon en microfibre posé sur une carrosserie noire lustrée" loading="lazy"></div>
+                        <div class="step__detail">
+                          <p>On vous explique ce qui a été fait et on vous rappelle quand revenir pour les pneus d’été. Vous repartez avec une auto propre et protégée.</p>
+                          <dl class="step__facts">
+                            <div><dt>Rappel</dt><dd>Pneus d’été au printemps</dd></div>
+                            <div><dt>Paiement</dt><dd>Sur place</dd></div>
+                          </dl>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              </section>
+
+              <!-- (04) Réalisations -->
+              <section class="work" id="realisations">
+                <header class="section-head">
+                  <p class="eyebrow"><span>(04)</span> Réalisations</p>
+                  <h2 class="section-head__title" data-split><span>Des autos qui</span><span class="is-muted">sortent comme neuves.</span></h2>
+                  <p class="section-head__aside">Quelques passages récents à l’atelier. Suivez-nous sur Instagram pour voir les autres.</p>
+                </header>
+
+                <figure class="work-feature" data-reveal>
+                  <div class="work-feature__media" data-parallax>
+                    <img src="assets/img/photos/work-feature.webp" alt="Voiture sport grise couverte de mousse dans l’atelier" loading="lazy">
+                  </div>
+                  <span class="work-feature__tag">Automne 2026</span>
+                  <button class="hotspot" type="button" style="--x:32%;--y:52%" aria-label="Calandre et phares">
+                    <span class="hotspot__marker"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg></span>
+                    <span class="hotspot__pop"><strong>Calandre et phares</strong><span>Mousse active laissée quelques minutes, puis rinçage</span></span>
+                  </button>
+                  <button class="hotspot" type="button" style="--x:62%;--y:70%" aria-label="Roues">
+                    <span class="hotspot__marker"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg></span>
+                    <span class="hotspot__pop"><strong>Roues</strong><span>Jantes nettoyées à la brosse, pneus lustrés</span></span>
+                  </button>
+                  <figcaption class="work-feature__caption">
+                    <strong>Lavage complet, BMW série M</strong>
+                    <span>Mousse · jantes · cire — Granby, QC</span>
+                  </figcaption>
+                </figure>
+
+                <div class="work-grid">
+                  <article class="work-job" data-reveal>
+                    <div class="work-job__media">
+                      <img src="assets/img/photos/work-gtr.webp" alt="Mousse projetée à l’arrière d’une voiture sport blanche" loading="lazy">
+                      <button class="hotspot" type="button" style="--x:40%;--y:45%" aria-label="Arrière et échappements">
+                        <span class="hotspot__marker"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg></span>
+                        <span class="hotspot__pop"><strong>Arrière et échappements</strong><span>Là où la slush s’accumule le plus</span></span>
+                      </button>
+                    </div>
+                    <h3>Prélavage à la mousse</h3>
+                    <ul class="tags"><li class="chip">Extérieur</li><li class="chip">45 min</li></ul>
+                  </article>
+                  <article class="work-job" data-reveal>
+                    <div class="work-job__media">
+                      <img src="assets/img/photos/work-interieur.webp" alt="Esthéticien qui nettoie le tableau de bord au pinceau" loading="lazy">
+                      <button class="hotspot" type="button" style="--x:55%;--y:35%" aria-label="Tableau de bord">
+                        <span class="hotspot__marker"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg></span>
+                        <span class="hotspot__pop"><strong>Tableau de bord</strong><span>Poussière retirée au pinceau, fente par fente</span></span>
+                      </button>
+                    </div>
+                    <h3>Esthétique intérieure</h3>
+                    <ul class="tags"><li class="chip">Intérieur</li><li class="chip">Détail complet</li></ul>
+                  </article>
+                  <blockquote class="work-quote" data-reveal>
+                    <p>« Antirouille et pneus faits le même matin. J’ai laissé l’auto, pris un café, et elle était prête pour l’hiver. »</p>
+                    <footer><strong>Client de Granby</strong><span>Témoignage d’exemple</span></footer>
+                  </blockquote>
+                </div>
+              </section>
+
+              <!-- (05) Réserver -->
+              <section class="book" id="reserver">
+                <p class="eyebrow"><span>(05)</span> Réserver</p>
+                <div class="book__stage">
+                  <div class="book__media" data-parallax>
+                    <img src="assets/img/photos/cta.webp" alt="Voiture sport lavée à l’eau sous pression" loading="lazy">
+                  </div>
+                  <div class="book__scrim" aria-hidden="true"></div>
+                  <div class="book__intro">
+                    <h2 class="book__title" data-split><span>Prête pour</span><span class="is-muted">l’hiver&#8239;?</span></h2>
+                    <p class="book__body">Réservez votre place avant la première tempête. On vous répond pour confirmer l’heure et le prix.</p>
+                    <div class="book__phone">
+                      <p>Ou appelez-nous directement</p>
+                      <a href="tel:+14503780888">450 378-0888</a>
+                      <p>1297, rue Principale, Granby</p>
+                    </div>
+                  </div>
+
+                  <form class="request-form" data-request-form novalidate>
+                    <p class="request-form__eyebrow">Rendez-vous</p>
+                    <h3 class="request-form__title">Réservez votre place</h3>
+                    <div class="request-form__fields">
+                      <label class="field field--half"><span class="sr-only">Nom</span><input name="nom" type="text" placeholder="Nom" autocomplete="name" required></label>
+                      <label class="field field--half"><span class="sr-only">Téléphone</span><input name="tel" type="tel" placeholder="Téléphone" autocomplete="tel" required></label>
+                      <label class="field"><span class="sr-only">Véhicule</span><input name="vehicule" type="text" placeholder="Véhicule (ex. Civic 2019)"></label>
+                    </div>
+                    <fieldset class="picker">
+                      <legend>Service souhaité</legend>
+                      <div class="picker__options">
+                        <label><input type="radio" name="service" value="Duo hiver (antirouille + pneus, 199,95 $ + taxes)" checked><span>Duo hiver</span></label>
+                        <label><input type="radio" name="service" value="Antirouille"><span>Antirouille</span></label>
+                        <label><input type="radio" name="service" value="Pose de pneus"><span>Pneus</span></label>
+                        <label><input type="radio" name="service" value="Esthétique auto"><span>Esthétique</span></label>
+                        <label><input type="radio" name="service" value="Unité mobile à domicile"><span>Unité mobile</span></label>
+                      </div>
+                    </fieldset>
+                    <button class="pill-button pill-button--dark request-form__submit" type="submit">
+                      <span class="pill-button__labels"><span>Réserver par WhatsApp</span><span aria-hidden="true">Réponse rapide</span></span>
+                      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                    </button>
+                    <p class="request-form__note" data-form-note>On vous répond dans la journée ouvrable</p>
+                  </form>
+                </div>
+
+                <ul class="assurances">
+                  <li>
+                    <span class="assurances__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+                    <span><small>Tout en une visite</small><strong>Antirouille et pneus le même jour</strong></span>
+                  </li>
+                  <li>
+                    <span class="assurances__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12 12 20l-8-8V4h8Z"/><circle cx="8.5" cy="8.5" r="1.2"/></svg></span>
+                    <span><small>Prix affiché</small><strong>199,95&nbsp;$ + taxes, sans surprise</strong></span>
+                  </li>
+                  <li>
+                    <span class="assurances__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 16V8h11v8M14 11h4l3 3v2h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></span>
+                    <span><small>Unité mobile</small><strong>On se déplace chez vous</strong></span>
+                  </li>
+                </ul>
+              </section>
+            </main>
+          </div>
+
+          <!-- Footer -->
+          <footer class="site-footer">
+            <div class="site-footer__top">
+              <p class="site-footer__statement"><span>Propre dessus.</span><span class="is-muted">Protégée dessous.</span></p>
+              <ul class="site-footer__links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#duo-hiver">Le duo hiver</a></li>
+                <li><a href="#processus">Processus</a></li>
+                <li><a href="#realisations">Réalisations</a></li>
+                <li><a href="https://www.instagram.com/vaporax_inc/" target="_blank" rel="noopener">Instagram</a></li>
+              </ul>
+            </div>
+            <dl class="site-footer__contact">
+              <div><dt>Adresse</dt><dd>1297, rue Principale<br>Granby, QC</dd></div>
+              <div><dt>Téléphone</dt><dd><a href="tel:+14503780888">450 378-0888</a></dd></div>
+              <div><dt>Heures</dt><dd>Sur rendez-vous</dd></div>
+              <div><dt>Instagram</dt><dd><a href="https://www.instagram.com/vaporax_inc/" target="_blank" rel="noopener">@vaporax_inc</a></dd></div>
+            </dl>
+            <div class="site-footer__wordmark" aria-hidden="true">
+              <span>Vaporax</span>
+            </div>
+            <div class="site-footer__legal">
+              <p>© 2026 Vaporax inc. · Granby, Québec</p>
+              <a class="back-to-top" href="#top">Retour en haut <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></span></a>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+  <script src="assets/js/main.js?v=1"></script>
+</body>
+</html>
