@@ -545,12 +545,12 @@ ul, ol { padding: 0; list-style: none; }
 .form__status.is-visible { display: block; }
 
 /* -- Marques ---------------------------------------------------------------- */
-.brands { border-block: 1px solid var(--rule); overflow: hidden; padding-block: 2.25rem; }
+.brands { border-block: 1px solid var(--rule); overflow: hidden; padding-block: clamp(2.5rem, 4vw, 3.5rem); }
 .brands__label { text-align: center; margin-bottom: 1.5rem; }
 .marquee { display: flex; width: max-content; animation: marquee 32s linear infinite; }
 .marquee:hover { animation-play-state: paused; }
-.marquee__group { display: flex; align-items: center; gap: clamp(3rem, 7vw, 6.5rem); padding-right: clamp(3rem, 7vw, 6.5rem); }
-.brand-logo { height: clamp(2.5rem, 4vw, 3.5rem); width: auto; color: var(--fg); opacity: 0.8; transition: color var(--dur), opacity var(--dur); }
+.marquee__group { display: flex; align-items: center; gap: clamp(3.5rem, 8vw, 8rem); padding-right: clamp(3.5rem, 8vw, 8rem); }
+.brand-logo { height: clamp(4rem, 7vw, 6.5rem); width: auto; color: var(--fg); opacity: 0.85; transition: color var(--dur), opacity var(--dur); }
 .brand-logo svg { height: 100%; width: auto; }
 .brand-logo:hover { color: var(--accent); opacity: 1; }
 @keyframes marquee { to { transform: translateX(-50%); } }
