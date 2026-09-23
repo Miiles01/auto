@@ -33,7 +33,25 @@
 
   /* -- Formats ----------------------------------------------------------- */
   var nf = new Intl.NumberFormat("fr-CA");
-  var fmtPrice = function (n) { return n ? nf.format(n) + " $" : "Prix sur demande"; };
+  /* Devise : les prix officiels sont en dollars canadiens. L'affichage peut
+     basculer en $ US (approximatif) au taux du jour, mis en cache 12 h. */
+  var FALLBACK_RATE = 0.71;
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (err) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (err) { /* stockage indisponible */ } }
+  };
+  var currency = store.get("pc-cur") === "USD" ? "USD" : "CAD";
+  var rate = FALLBACK_RATE;
+  var rateCache = null;
+  try { rateCache = JSON.parse(store.get("pc-rate") || "null"); } catch (err) { rateCache = null; }
+  if (rateCache && rateCache.v > 0) { rate = rateCache.v; }
+  var fmtCAD = function (n) { return n ? nf.format(n) + "\u00a0$" : "Prix sur demande"; };
+  var fmtPrice = function (n) {
+    if (!n) { return "Prix sur demande"; }
+    if (currency === "USD") { return "≈\u00a0" + nf.format(Math.round(n * rate)) + "\u00a0$\u00a0US"; }
+    return fmtCAD(n);
+  };
+  var priceHTML = function (n) { return '<span data-price="' + n + '">' + fmtPrice(n) + "</span>"; };
   var fmtKm = function (n) { return nf.format(n) + " km"; };
   var BODY = { vus: "VUS", camion: "Camionnette", auto: "Berline et compacte", coupe: "Coupé sport" };
   var cars = (window.PC_CARS || []).slice();
@@ -59,7 +77,7 @@
       "</div>" +
       '<h3 class="car-card__title"><a class="car-card__link" href="' + carUrl(c) + '">' + esc(carName(c)) + " <span>" + c.year + "</span></a></h3>" +
       '<p class="car-card__spec">' + fmtKm(c.km) + " · " + esc(c.transmission) + " · " + esc(c.drivetrain) + "</p>" +
-      '<div class="car-card__foot"><span class="car-card__price">' + fmtPrice(c.price) + '</span><span class="car-card__more">Détails ' + icons.arrow + "</span></div>" +
+      '<div class="car-card__foot"><span class="car-card__price">' + priceHTML(c.price) + '</span><span class="car-card__more">Détails ' + icons.arrow + "</span></div>" +
       "</article>"
     );
   };
@@ -76,7 +94,7 @@
   };
 
   window.PC = {
-    cars: cars, icons: icons, fmtPrice: fmtPrice, fmtKm: fmtKm, BODY: BODY,
+    cars: cars, icons: icons, fmtPrice: fmtPrice, fmtCAD: fmtCAD, priceHTML: priceHTML, fmtKm: fmtKm, BODY: BODY,
     carName: carName, carUrl: carUrl, waLink: waLink, esc: esc, pad: pad,
     renderCard: renderCard, renderSoonCard: renderSoonCard,
     reduceMotion: reduceMotion, finePointer: finePointer,
@@ -130,6 +148,44 @@
     PC.scrollTo(el);
     history.replaceState(null, "", id);
   });
+
+  /* -- Sélecteur de devise ----------------------------------------------- */
+  PC.currency = function () { return currency; };
+  PC.paintPrices = function (root) {
+    (root || document).querySelectorAll("[data-price]").forEach(function (el) {
+      el.textContent = fmtPrice(+el.getAttribute("data-price"));
+    });
+    document.querySelectorAll("[data-cur-note]").forEach(function (el) {
+      el.textContent = currency === "USD"
+        ? "Conversion approximative au taux du jour (1 $ CA = " + rate.toFixed(4).replace(".", ",") + " $ US). Prix officiel : " + fmtCAD(+el.getAttribute("data-cur-note")) + " CA."
+        : "Prix en dollars canadiens, taxes et frais en sus.";
+    });
+    document.querySelectorAll("[data-cur]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-cur") === currency));
+    });
+  };
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-cur]");
+    if (!b) { return; }
+    currency = b.getAttribute("data-cur") === "USD" ? "USD" : "CAD";
+    store.set("pc-cur", currency);
+    PC.paintPrices();
+  });
+  var fresh = rateCache && Date.now() - rateCache.t < 12 * 3600 * 1000;
+  if (!fresh && window.fetch) {
+    fetch("https://open.er-api.com/v6/latest/CAD")
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var v = d && d.rates && d.rates.USD;
+        if (v > 0) {
+          rate = v;
+          store.set("pc-rate", JSON.stringify({ v: v, t: Date.now() }));
+          PC.paintPrices();
+        }
+      })
+      .catch(function () { /* on garde le dernier taux connu */ });
+  }
+  PC.paintPrices();
 
   /* -- Transition entre les pages -----------------------------------------
      Le logo apparaît en fondu sur fond noir quand on change de page. Un lien
@@ -231,7 +287,7 @@
     if (!select) { return; }
     var html = '<option value="">Aucun en particulier</option>';
     cars.slice().sort(function (a, b) { return a.make.localeCompare(b.make) || b.year - a.year; }).forEach(function (c) {
-      html += '<option value="' + esc(c.slug) + '"' + (c.slug === selectedSlug ? " selected" : "") + ">" + esc(carName(c) + " " + c.year + " — " + fmtPrice(c.price)) + "</option>";
+      html += '<option value="' + esc(c.slug) + '"' + (c.slug === selectedSlug ? " selected" : "") + ">" + esc(carName(c) + " " + c.year + " — " + fmtCAD(c.price)) + "</option>";
     });
     select.innerHTML = html;
   };
@@ -274,7 +330,7 @@
         "Téléphone : " + d.get("telephone"),
         "Courriel : " + d.get("courriel")
       ];
-      if (car) { lines.push("Véhicule : " + carName(car) + " " + car.year + " (stock " + car.stock + ", " + fmtPrice(car.price) + ")"); }
+      if (car) { lines.push("Véhicule : " + carName(car) + " " + car.year + " (stock " + car.stock + ", " + fmtCAD(car.price) + ")"); }
       if (d.get("sujet")) { lines.push("Sujet : " + d.get("sujet")); }
       if (d.get("message")) { lines.push("", String(d.get("message"))); }
       window.open(waLink(lines.join("\n")), "_blank", "noopener");

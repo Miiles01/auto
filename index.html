@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css?v=7">
+  <link rel="stylesheet" href="assets/css/styles.css?v=9">
   <script>try{if(sessionStorage.getItem("pc-pt")==="1"){document.documentElement.classList.add("pt-arrive")}}catch(e){}</script>
   <script type="application/ld+json">
   {
@@ -64,6 +64,7 @@
         <a href="#succursales">Nous joindre</a>
       </nav>
       <div class="header-utils">
+        <div class="cur-toggle" role="group" aria-label="Devise d'affichage des prix"><button type="button" data-cur="CAD" aria-pressed="true">CAD</button><button type="button" data-cur="USD" aria-pressed="false">USD</button></div>
         <a class="tel" href="tel:+14503780888"><i data-icon="phone"></i><span>450 378-0888</span></a>
         <a class="btn btn--red" href="inventaire.html">Voir l'inventaire</a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Ouvrir le menu"><span></span></button>
@@ -111,7 +112,7 @@
 
               <a class="hero__left-plate" href="vehicule.html?v=kia-forte-2021-10">
                 <span class="plate plate--reveal" data-hero><img src="assets/img/autos/thumb/kia-forte-2021-10-01.webp" alt="Kia Forte 2021 grise, vue avant" width="720" height="498"></span>
-                <p class="caption" data-hero-cap>Kia Forte 2021<br>16 495 $</p>
+                <p class="caption" data-hero-cap>Kia Forte 2021<br><span data-price="16495">16 495 $</span></p>
               </a>
 
               <div class="hero__row">
@@ -122,7 +123,7 @@
 
                 <a class="hero__feature" href="vehicule.html?v=scion-fr-s-2014-1" data-cursor="Voir">
                   <span class="plate plate--reveal" data-hero><img src="assets/img/autos/scion-fr-s-2014-1-05.webp" alt="Scion FR-S 2014 orange, vue de profil sur le terrain de PC Auto" width="940" height="650" fetchpriority="high"></span>
-                  <span class="hero__feature-cap caption" data-hero-cap><span>Coupé sport · 178 705 km</span><span>12 995 $</span></span>
+                  <span class="hero__feature-cap caption" data-hero-cap><span>Coupé sport · 178 705 km</span><span data-price="12995">12 995 $</span></span>
                 </a>
 
                 <div class="hero__side">
@@ -512,8 +513,8 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
-  <script src="assets/js/data.js?v=7" defer></script>
-  <script src="assets/js/main.js?v=7" defer></script>
-  <script src="assets/js/home.js?v=7" defer></script>
+  <script src="assets/js/data.js?v=9" defer></script>
+  <script src="assets/js/main.js?v=9" defer></script>
+  <script src="assets/js/home.js?v=9" defer></script>
 </body>
 </html>

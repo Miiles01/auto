@@ -26,7 +26,7 @@
   if (arrivals) {
     arrivals.innerHTML = cars.slice().sort(function (a, b) { return b.id - a.id; }).slice(0, 2).map(function (c) {
       return '<a href="' + PC.carUrl(c) + '"><span class="plate plate--reveal" data-hero><img src="' + c.thumbs[0] + '" alt="' + PC.esc(PC.carName(c) + " " + c.year) + '" width="720" height="498"></span>' +
-        '<span class="caption" data-hero-cap>' + PC.esc(PC.carName(c)) + " " + c.year + "<br>" + PC.fmtPrice(c.price) + "</span></a>";
+        '<span class="caption" data-hero-cap>' + PC.esc(PC.carName(c)) + " " + c.year + "<br>" + PC.priceHTML(c.price) + "</span></a>";
     }).join("");
   }
 

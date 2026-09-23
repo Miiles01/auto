@@ -24,7 +24,7 @@
 
   var name = PC.carName(car);
   var full = name + " " + car.year;
-  var price = PC.fmtPrice(car.price);
+  var price = PC.fmtCAD(car.price);
   var interest = "Bonjour PC Auto, je suis intéressé(e) par le " + full + " (stock " + car.stock + ", " + price + ").";
   var testDrive = "Bonjour PC Auto, j’aimerais réserver un essai routier pour le " + full + " (stock " + car.stock + ") à votre succursale de " + car.location + ".";
 
@@ -50,7 +50,7 @@
 
   /* Rendu */
   var specs = [
-    ["Prix", price], ["Kilométrage", PC.fmtKm(car.km)], ["Année", car.year], ["Transmission", car.transmission],
+    ["Prix", PC.priceHTML(car.price), true], ["Kilométrage", PC.fmtKm(car.km)], ["Année", car.year], ["Transmission", car.transmission],
     ["Moteur", car.engine], ["Motricité", car.drivetrain], ["Couleur", car.color], ["Catégorie", PC.BODY[car.body]],
     ["Succursale", car.location], ["Numéro de stock", car.stock], ["Numéro de série (NIV)", car.vin]
   ];
@@ -58,7 +58,7 @@
   body.innerHTML =
     '<header class="vd__head">' +
       '<h1 class="vd__title display"><small>' + esc(PC.BODY[car.body]) + " · " + car.year + " · " + esc(car.location) + "</small>" + esc(name) + "</h1>" +
-      '<div class="vd__price"><b class="tabular">' + price + "</b><span>Taxes et frais en sus · Stock " + esc(car.stock) + "</span></div>" +
+      '<div class="vd__price"><b class="tabular">' + PC.priceHTML(car.price) + '</b><span data-cur-note="' + car.price + '"></span><span>Stock ' + esc(car.stock) + "</span></div>" +
     "</header>" +
     '<div class="vd__layout">' +
       '<div class="vd__main">' +
@@ -76,7 +76,7 @@
       "</div>" +
       '<div class="vd__details">' +
         '<div data-reveal><h2 class="vd__subhead">Caractéristiques</h2><table class="spec-table"><tbody>' +
-          specs.map(function (s) { return '<tr><th scope="row">' + s[0] + "</th><td>" + esc(s[1]) + "</td></tr>"; }).join("") +
+          specs.map(function (s) { return '<tr><th scope="row">' + s[0] + "</th><td>" + (s[2] ? s[1] : esc(s[1])) + "</td></tr>"; }).join("") +
         "</tbody></table></div>" +
         '<div data-reveal><h2 class="vd__subhead">Équipements et options</h2><ul class="options">' +
           car.options.map(function (o) { return "<li>" + icons.check + esc(o) + "</li>"; }).join("") +
@@ -99,7 +99,7 @@
           "</div>" +
         "</div>" +
         '<div class="panel">' +
-          "<h2>Estimez vos paiements</h2>" +
+          "<h2>Estimez vos paiements <small style=\"font-size:.55em;color:var(--fg-muted)\">en $ CA</small></h2>" +
           '<div class="calc" data-calc>' +
             '<div class="calc__row"><label for="c-down"><span>Mise de fonds</span><output data-c-down-out></output></label><input id="c-down" type="range" min="0" max="' + Math.round(car.price * 0.5 / 250) * 250 + '" step="250" value="' + Math.round(car.price * 0.1 / 250) * 250 + '"></div>' +
             '<div class="calc__row"><span style="font-size:.875rem">Terme</span><div class="calc__terms" role="group" aria-label="Terme du financement">' +
@@ -236,6 +236,7 @@
       .slice(0, 4 - similar.length));
   }
   document.querySelector("[data-vd-similar]").innerHTML = similar.map(PC.renderCard).join("");
+  PC.paintPrices();
 
   if (motion) {
     gsap.from(".vd__title, .vd__price", { y: 40, opacity: 0, duration: 1.1, ease: "expo.out", stagger: 0.08 });

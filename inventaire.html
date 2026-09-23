@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css?v=7">
+  <link rel="stylesheet" href="assets/css/styles.css?v=9">
   <script>try{if(sessionStorage.getItem("pc-pt")==="1"){document.documentElement.classList.add("pt-arrive")}}catch(e){}</script>
 </head>
 <body>
@@ -37,6 +37,7 @@
         <a href="index.html#succursales">Nous joindre</a>
       </nav>
       <div class="header-utils">
+        <div class="cur-toggle" role="group" aria-label="Devise d'affichage des prix"><button type="button" data-cur="CAD" aria-pressed="true">CAD</button><button type="button" data-cur="USD" aria-pressed="false">USD</button></div>
         <a class="tel" href="tel:+14503780888"><i data-icon="phone"></i><span>450 378-0888</span></a>
         <a class="btn btn--red" href="inventaire.html">Voir l'inventaire</a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Ouvrir le menu"><span></span></button>
@@ -94,7 +95,7 @@
                 </select>
               </div>
               <div class="field">
-                <label for="inv-prix">Prix maximum</label>
+                <label for="inv-prix">Prix maximum ($ CA)</label>
                 <select id="inv-prix" name="prix">
                   <option value="">Tous les prix</option>
                   <option value="6000">6 000 $ et moins</option>
@@ -194,8 +195,8 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
-  <script src="assets/js/data.js?v=7" defer></script>
-  <script src="assets/js/main.js?v=7" defer></script>
-  <script src="assets/js/inventaire.js?v=7" defer></script>
+  <script src="assets/js/data.js?v=9" defer></script>
+  <script src="assets/js/main.js?v=9" defer></script>
+  <script src="assets/js/inventaire.js?v=9" defer></script>
 </body>
 </html>

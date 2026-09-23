@@ -241,6 +241,13 @@ ul, ol { padding: 0; list-style: none; }
 .header-utils .tel { display: inline-flex; align-items: center; gap: 0.5rem; }
 .header-utils .tel svg { width: 1rem; height: 1rem; }
 .header-utils .btn { min-height: 2.5rem; padding: 0.5rem 1.125rem; font-size: 0.875rem; }
+.cur-toggle { display: inline-flex; padding: 3px; border-radius: 999px; box-shadow: inset 0 0 0 1px currentColor; }
+.cur-toggle button { min-height: 2rem; min-width: 2.75rem; padding: 0 0.625rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em; color: inherit; transition: background var(--dur-fast), color var(--dur-fast); }
+.cur-toggle button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+.cur-toggle button:not([aria-pressed="true"]):hover { background: rgba(222, 4, 25, 0.1); }
+.menu-open .cur-toggle button[aria-pressed="true"] { background: var(--on-accent); color: var(--accent); }
+.vd__price > span[data-cur-note] { display: block; max-width: 22rem; margin-left: auto; margin-top: 0.5rem; }
+.vd__price > span { display: block; }
 .menu-toggle { display: none; width: 2.75rem; height: 2.75rem; align-items: center; justify-content: center; margin-right: -0.5rem; }
 .menu-toggle span { display: block; width: 1.5rem; height: 2px; background: currentColor; position: relative; transition: background var(--dur-fast); }
 .menu-toggle span::before, .menu-toggle span::after {
@@ -665,7 +672,7 @@ ul, ol { padding: 0; list-style: none; }
 .vd__title small { display: block; font-family: var(--font-serif); font-weight: 400; font-size: clamp(1.25rem, 2vw, 1.75rem); color: var(--fg); margin-bottom: 0.5rem; letter-spacing: 0; line-height: 1.1; }
 .vd__price { text-align: right; }
 .vd__price b { display: block; font-family: var(--font-display); font-weight: 700; font-size: clamp(3rem, 6vw, 5.25rem); line-height: 0.9; }
-.vd__price span { font-size: 0.875rem; color: var(--fg-muted); }
+.vd__price > span { font-size: 0.875rem; color: var(--fg-muted); }
 .vd__layout { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: clamp(1.5rem, 3vw, 3rem); align-items: start; }
 
 .gallery { display: grid; gap: 0.75rem; }
@@ -788,6 +795,7 @@ ul, ol { padding: 0; list-style: none; }
   .locations { grid-template-columns: 1fr; }
   .vd__head { grid-template-columns: 1fr; }
   .vd__price { text-align: left; }
+  .vd__price > span[data-cur-note] { margin-left: 0; }
   .vd__details { grid-template-columns: 1fr; }
   .gallery__thumbs { grid-auto-columns: 22%; }
   .footer__top { grid-template-columns: 1fr 1fr; }
