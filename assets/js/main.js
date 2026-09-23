@@ -131,6 +131,55 @@
     history.replaceState(null, "", id);
   });
 
+  /* -- Transition entre les pages -----------------------------------------
+     Le logo apparaît en fondu sur fond noir quand on change de page. Un lien
+     vers une ancre de la page courante défile simplement, sans transition. */
+  var pt = document.querySelector(".page-transition");
+  var root = document.documentElement;
+  var arrived = root.classList.contains("pt-arrive");
+  PC.arrivedByTransition = arrived;
+  try { sessionStorage.removeItem("pc-pt"); } catch (err) { /* stockage indisponible */ }
+  var revealPage = function () {
+    if (!pt || !root.classList.contains("pt-arrive")) { return; }
+    pt.classList.add("is-leaving");
+    setTimeout(function () {
+      root.classList.remove("pt-arrive");
+      setTimeout(function () { pt.classList.remove("is-leaving"); }, 500);
+    }, 380);
+  };
+  if (arrived) {
+    if (document.readyState === "complete") { setTimeout(revealPage, 250); }
+    else { window.addEventListener("load", function () { setTimeout(revealPage, 150); }); }
+    setTimeout(revealPage, 2500); /* filet de sécurité si une image tarde */
+  }
+  /* Retour arrière depuis le cache du navigateur : ne jamais rester bloqué sur le noir */
+  window.addEventListener("pageshow", function (e) {
+    if (e.persisted && pt) { pt.classList.remove("is-active", "is-leaving"); root.classList.remove("pt-arrive"); }
+  });
+
+  document.addEventListener("click", function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) { return; }
+    var a = e.target.closest("a[href]");
+    if (!a || !pt || a.target === "_blank" || a.hasAttribute("download")) { return; }
+    var href = a.getAttribute("href");
+    if (!href || href.charAt(0) === "#" || /^(tel|mailto|sms|javascript):/i.test(href)) { return; }
+    var url = new URL(a.href, location.href);
+    if (url.origin !== location.origin) { return; }
+    var samePage = url.pathname.replace(/index\.html$/, "") === location.pathname.replace(/index\.html$/, "") && url.search === location.search;
+    if (samePage) {
+      var target = url.hash && url.hash.length > 1 ? document.querySelector(url.hash) : null;
+      if (target) { e.preventDefault(); closeMenu(); PC.scrollTo(target); history.replaceState(null, "", url.hash); }
+      return;
+    }
+    if (reduceMotion) { return; }
+    e.preventDefault();
+    closeMenu();
+    try { sessionStorage.setItem("pc-pt", "1"); } catch (err) { /* stockage indisponible */ }
+    pt.classList.remove("is-leaving");
+    pt.classList.add("is-active");
+    setTimeout(function () { location.href = url.href; }, 750);
+  });
+
   /* -- En-tête ------------------------------------------------------------ */
   var header = document.querySelector(".site-header");
   var lastY = 0;
@@ -313,9 +362,10 @@
     var pre = document.querySelector(".preloader");
     var seen = false;
     try { seen = sessionStorage.getItem("pc-preloaded") === "1"; } catch (err) { seen = false; }
-    if (!pre || !hasGsap || reduceMotion || seen) {
+    if (!pre || !hasGsap || reduceMotion || seen || PC.arrivedByTransition) {
       if (pre) { pre.remove(); }
-      onDone(true);
+      try { sessionStorage.setItem("pc-preloaded", "1"); } catch (err) { /* stockage indisponible */ }
+      if (PC.arrivedByTransition) { setTimeout(function () { onDone(true); }, 650); } else { onDone(true); }
       return;
     }
     try { sessionStorage.setItem("pc-preloaded", "1"); } catch (err) { /* stockage indisponible */ }

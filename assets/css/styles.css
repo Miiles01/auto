@@ -289,6 +289,28 @@ ul, ol { padding: 0; list-style: none; }
 .preloader__bar { position: absolute; left: 0; bottom: 0; height: 4px; width: 100%; background: var(--on-accent); transform-origin: left; transform: scaleX(0); }
 .no-preloader .preloader { display: none; }
 
+/* -- Transition entre les pages ---------------------------------------------- */
+.page-transition {
+  position: fixed; inset: 0; z-index: 150;
+  background: #000;
+  display: grid; place-items: center;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 450ms var(--ease-in-out), visibility 0s linear 450ms;
+}
+.page-transition img {
+  width: clamp(7rem, 13vw, 10.5rem); height: auto;
+  opacity: 0; transform: scale(0.96);
+  transition: opacity 450ms var(--ease-out), transform 900ms var(--ease-out);
+}
+.pt-arrive .page-transition,
+.page-transition.is-active {
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transition: opacity 450ms var(--ease-in-out), visibility 0s;
+}
+.pt-arrive .page-transition img { opacity: 1; transform: none; transition: none; }
+.page-transition.is-active img { opacity: 1; transform: none; transition-delay: 150ms; }
+.page-transition.is-leaving img { opacity: 0; transform: scale(1.02); transition: opacity 400ms var(--ease-out), transform 600ms var(--ease-out); }
+
 /* -- Héros ----------------------------------------------------------------- */
 .hero {
   position: relative;
@@ -802,6 +824,7 @@ ul, ol { padding: 0; list-style: none; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
   .js [data-reveal] { opacity: 1; transform: none; }
+  .page-transition { display: none; }
   .plate--reveal { clip-path: none; }
   .manifesto .word { opacity: 1; }
   .marquee { animation: none; flex-wrap: wrap; justify-content: center; width: auto; }
