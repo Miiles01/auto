@@ -199,9 +199,12 @@
     if (!pt || !root.classList.contains("pt-arrive")) { return; }
     pt.classList.add("is-leaving");
     setTimeout(function () {
+      /* on réactive la transition avant de retirer la classe, pour que le rideau remonte */
+      pt.style.transition = "transform 850ms cubic-bezier(0.77, 0, 0.175, 1), visibility 0s linear 850ms";
+      void pt.offsetWidth;
       root.classList.remove("pt-arrive");
-      setTimeout(function () { pt.classList.remove("is-leaving"); }, 500);
-    }, 380);
+      setTimeout(function () { pt.classList.remove("is-leaving"); pt.style.transition = ""; }, 900);
+    }, 320);
   };
   if (arrived) {
     if (document.readyState === "complete") { setTimeout(revealPage, 250); }
@@ -233,7 +236,7 @@
     try { sessionStorage.setItem("pc-pt", "1"); } catch (err) { /* stockage indisponible */ }
     pt.classList.remove("is-leaving");
     pt.classList.add("is-active");
-    setTimeout(function () { location.href = url.href; }, 750);
+    setTimeout(function () { location.href = url.href; }, 1050);
   });
 
   /* -- En-tête ------------------------------------------------------------ */

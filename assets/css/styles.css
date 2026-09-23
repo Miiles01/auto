@@ -296,27 +296,33 @@ ul, ol { padding: 0; list-style: none; }
 .preloader__bar { position: absolute; left: 0; bottom: 0; height: 4px; width: 100%; background: var(--on-accent); transform-origin: left; transform: scaleX(0); }
 .no-preloader .preloader { display: none; }
 
-/* -- Transition entre les pages ---------------------------------------------- */
+/* -- Transition entre les pages ----------------------------------------------
+   Rideau noir qui descend du haut, logo en fondu, puis remonte sur la nouvelle
+   page (courbe power4.inOut, comme la référence CodePen). */
 .page-transition {
   position: fixed; inset: 0; z-index: 150;
   background: #000;
   display: grid; place-items: center;
-  opacity: 0; visibility: hidden; pointer-events: none;
-  transition: opacity 450ms var(--ease-in-out), visibility 0s linear 450ms;
+  transform: translate3d(0, -100%, 0);
+  visibility: hidden; pointer-events: none;
+  transition: transform 850ms cubic-bezier(0.77, 0, 0.175, 1), visibility 0s linear 850ms;
+  will-change: transform;
 }
 .page-transition img {
   width: clamp(7rem, 13vw, 10.5rem); height: auto;
-  opacity: 0; transform: scale(0.96);
-  transition: opacity 450ms var(--ease-out), transform 900ms var(--ease-out);
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 500ms var(--ease-out), transform 700ms var(--ease-out);
 }
 .pt-arrive .page-transition,
 .page-transition.is-active {
-  opacity: 1; visibility: visible; pointer-events: auto;
-  transition: opacity 450ms var(--ease-in-out), visibility 0s;
+  transform: translate3d(0, 0, 0);
+  visibility: visible; pointer-events: auto;
+  transition: transform 850ms cubic-bezier(0.77, 0, 0.175, 1), visibility 0s;
 }
+.pt-arrive .page-transition { transition: none; }
 .pt-arrive .page-transition img { opacity: 1; transform: none; transition: none; }
-.page-transition.is-active img { opacity: 1; transform: none; transition-delay: 150ms; }
-.page-transition.is-leaving img { opacity: 0; transform: scale(1.02); transition: opacity 400ms var(--ease-out), transform 600ms var(--ease-out); }
+.page-transition.is-active img { opacity: 1; transform: none; transition-delay: 550ms; }
+.page-transition.is-leaving img { opacity: 0; transform: translateY(-14px); transition: opacity 350ms var(--ease-out), transform 450ms var(--ease-out); }
 
 /* -- Héros ----------------------------------------------------------------- */
 .hero {
