@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inventaire de véhicules d'occasion | PC Auto Granby et Sainte-Eulalie</title>
+  <meta name="description" content="Tout l'inventaire de PC Auto : VUS, berlines, camionnettes 4x4. Prix affichés, véhicules inspectés et garantis, financement sur place à Granby et Sainte-Eulalie.">
+  <link rel="canonical" href="https://pcautogranby.com/inventaire.html">
+  <meta name="theme-color" content="#de0419">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_CA">
+  <meta property="og:site_name" content="PC Auto">
+  <meta property="og:title" content="Inventaire de véhicules d'occasion | PC Auto Granby et Sainte-Eulalie">
+  <meta property="og:description" content="Tout l'inventaire de PC Auto : VUS, berlines, camionnettes 4x4. Prix affichés, véhicules inspectés et garantis, financement sur place à Granby et Sainte-Eulalie.">
+  <meta property="og:image" content="https://pcautogranby.com/assets/img/autos/scion-fr-s-2014-1-05.webp">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css?v=3">
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="index.html" aria-label="PC Auto, accueil">
+        <img src="assets/img/logo-pcauto.webp" alt="PC Auto" width="480" height="417">
+      </a>
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="inventaire.html" aria-current="page">Inventaire</a>
+        <a href="index.html#financement">Financement</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#succursales">Nous joindre</a>
+      </nav>
+      <div class="header-utils">
+        <a class="tel" href="tel:+14503780888"><i data-icon="phone"></i><span>450 378-0888</span></a>
+        <a class="btn btn--red" href="inventaire.html">Voir l'inventaire</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Ouvrir le menu"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <nav aria-label="Navigation mobile">
+      <a href="inventaire.html" aria-current="page">Inventaire</a>
+      <a href="index.html#financement">Financement</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#succursales">Nous joindre</a>
+    </nav>
+    <div class="mobile-menu__foot">
+      <a class="btn btn--light btn--lg" href="tel:+14503780888"><i data-icon="phone"></i>Appeler le 450 378-0888</a>
+      <p>Lun. au ven. 8 h – 18 h · Sam. 10 h – 13 h (sur rendez-vous)</p>
+    </div>
+  </div>
+
+  <a class="wa-float" href="https://api.whatsapp.com/send?phone=14503780888&amp;text=" target="_blank" rel="noopener" aria-label="Écrivez-nous sur WhatsApp">
+    <i data-icon="whatsapp"></i>
+    <span class="wa-float__label">Écrivez-nous</span>
+  </a>
+
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+      <main id="contenu">
+        <section class="page-hero" aria-labelledby="inv-title">
+          <div class="container">
+            <nav class="breadcrumb" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Inventaire</span></nav>
+            <div class="page-hero__row">
+              <h1 class="display" id="inv-title" data-reveal>Inventaire</h1>
+              <div class="page-hero__aside">
+                <p class="caption"><span data-count-total>25</span> véhicules d'occasion inspectés et garantis, à Granby et à Sainte-Eulalie.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" style="padding-top:0" aria-label="Résultats">
+          <div class="container">
+            <form class="inv-toolbar" role="search" data-inv-form onsubmit="return false">
+              <div class="field search-field">
+                <label for="inv-q">Rechercher</label>
+                <input id="inv-q" name="q" type="search" placeholder="Marque, modèle, année…" autocomplete="off">
+                <i data-icon="search"></i>
+              </div>
+              <div class="field">
+                <label for="inv-loc">Succursale</label>
+                <select id="inv-loc" name="succursale">
+                  <option value="">Toutes</option>
+                  <option value="Granby">Granby</option>
+                  <option value="Sainte-Eulalie">Sainte-Eulalie</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="inv-prix">Prix maximum</label>
+                <select id="inv-prix" name="prix">
+                  <option value="">Tous les prix</option>
+                  <option value="6000">6 000 $ et moins</option>
+                  <option value="8000">8 000 $ et moins</option>
+                  <option value="10000">10 000 $ et moins</option>
+                  <option value="15000">15 000 $ et moins</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="inv-sort">Trier par</label>
+                <select id="inv-sort" name="tri">
+                  <option value="recent">Année : plus récent</option>
+                  <option value="prix-asc">Prix : croissant</option>
+                  <option value="prix-desc">Prix : décroissant</option>
+                  <option value="km">Kilométrage : plus bas</option>
+                </select>
+              </div>
+            </form>
+            <div class="inv-bar">
+              <div class="filters__pills" role="group" aria-label="Filtrer par catégorie" data-inv-types></div>
+              <div style="display:flex;gap:1.25rem;align-items:center">
+                <p class="inv-count" aria-live="polite" data-inv-count></p>
+                <button class="inv-reset" type="button" data-inv-reset hidden>Effacer les filtres</button>
+              </div>
+            </div>
+            <div class="car-grid" data-inv-grid></div>
+            <div class="inv-empty" data-inv-empty>
+              <p>Aucun véhicule ne correspond à votre recherche.</p>
+              <a class="btn btn--red" href="https://api.whatsapp.com/send?phone=14503780888&amp;text=Bonjour%20PC%20Auto%2C%20je%20cherche%20un%20v%C3%A9hicule%20%3A%20" target="_blank" rel="noopener"><i data-icon="whatsapp"></i>Dites-nous ce que vous cherchez</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section section--dark section--tight" aria-labelledby="inv-cta">
+          <div class="container">
+            <div class="finance">
+              <div>
+                <p class="eyebrow" style="margin-bottom:1rem">Vous ne trouvez pas ?</p>
+                <h2 class="h-section" id="inv-cta" data-split>Cinq véhicules sont <em>en préparation</em>. Dites-nous ce que vous cherchez.</h2>
+              </div>
+              <div class="finance__actions" style="justify-content:flex-end">
+                <a class="btn btn--wa btn--lg" href="https://api.whatsapp.com/send?phone=14503780888&amp;text=Bonjour%20PC%20Auto%2C%20je%20cherche%20un%20v%C3%A9hicule%20%3A%20" target="_blank" rel="noopener"><i data-icon="whatsapp"></i>WhatsApp</a>
+                <a class="btn btn--ghost-light btn--lg" href="tel:+14503780888"><i data-icon="phone"></i>450 378-0888</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container">
+          <div class="footer__top">
+            <div class="footer__cta">
+              <h2>Votre prochain véhicule<br>vous attend</h2>
+              <a class="btn btn--light btn--lg" href="inventaire.html">Voir l'inventaire <i data-icon="arrow"></i></a>
+            </div>
+            <div class="footer__col">
+              <h3>Explorer</h3>
+              <ul>
+                <li><a class="link-underline" href="inventaire.html">Inventaire</a></li>
+                <li><a class="link-underline" href="inventaire.html?type=vus">VUS</a></li>
+                <li><a class="link-underline" href="inventaire.html?type=auto">Berlines et compactes</a></li>
+                <li><a class="link-underline" href="inventaire.html?type=camion">Camionnettes</a></li>
+              </ul>
+            </div>
+            <div class="footer__col">
+              <h3>Services</h3>
+              <ul>
+                <li><a class="link-underline" href="index.html#financement">Financement</a></li>
+                <li><a class="link-underline" href="index.html#services">Nous achetons votre véhicule</a></li>
+                <li><a class="link-underline" href="index.html#services">Garantie</a></li>
+                <li><a class="link-underline" href="index.html#contact">Nous écrire</a></li>
+              </ul>
+            </div>
+            <div class="footer__col">
+              <h3>Nous joindre</h3>
+              <ul>
+                <li><a class="link-underline" href="tel:+14503780888">450 378-0888</a></li>
+                <li><a class="link-underline" href="https://api.whatsapp.com/send?phone=14503780888&amp;text=" target="_blank" rel="noopener">WhatsApp</a></li>
+                <li>1297, rue Principale, Granby</li>
+                <li>315, rue des Bouleaux, Sainte-Eulalie</li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer__legal">
+            <span>© <span data-year>2026</span> PC Auto. Tous droits réservés.</span>
+            <span>Lun. au ven. 8 h – 18 h · Sam. 10 h – 13 h (sur rendez-vous)</span>
+            <span>Prix en dollars canadiens, taxes et frais en sus.</span>
+          </div>
+          <p class="footer__word" aria-hidden="true"><span>P</span><span>C</span><span>&nbsp;</span><span>A</span><span>u</span><span>t</span><span>o</span></p>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
+  <script src="assets/js/data.js?v=3" defer></script>
+  <script src="assets/js/main.js?v=3" defer></script>
+  <script src="assets/js/inventaire.js?v=3" defer></script>
+</body>
+</html>
