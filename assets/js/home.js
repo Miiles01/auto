@@ -21,15 +21,6 @@
   /* Compteurs */
   document.querySelectorAll("[data-count-total]").forEach(function (el) { el.textContent = cars.length; });
 
-  /* Nouveaux arrivages : les deux dernières entrées de l'inventaire */
-  var arrivals = document.querySelector("[data-new-arrivals]");
-  if (arrivals) {
-    arrivals.innerHTML = cars.slice().sort(function (a, b) { return b.id - a.id; }).slice(0, 2).map(function (c) {
-      return '<a href="' + PC.carUrl(c) + '"><span class="plate plate--reveal" data-hero><img src="' + c.thumbs[0] + '" alt="' + PC.esc(PC.carName(c) + " " + c.year) + '" width="720" height="498"></span>' +
-        '<span class="caption" data-hero-cap>' + PC.esc(PC.carName(c)) + " " + c.year + "<br>" + PC.priceHTML(c.price) + "</span></a>";
-    }).join("");
-  }
-
   /* -- Parcourir : liste + bande rouge + plaques ---------------------------- */
   var list = document.querySelector("[data-browse-list]");
   var band = document.querySelector("[data-browse-band]");
@@ -186,20 +177,43 @@
     });
   }
 
+  /* -- Vidéo du héros : pause hors écran, bouton pause, mouvement réduit -------- */
+  var video = document.querySelector(".hero__video");
+  var pauseBtn = document.querySelector("[data-hero-pause]");
+  var userPaused = false;
+  if (video) {
+    if (PC.reduceMotion) {
+      video.removeAttribute("autoplay");
+      video.pause();
+    } else {
+      var tryPlay = function () { var p = video.play(); if (p && p.catch) { p.catch(function () { /* lecture bloquée : l'affiche reste visible */ }); } };
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting && !userPaused) { tryPlay(); } else { video.pause(); }
+          });
+        }, { threshold: 0.1 }).observe(video);
+      }
+      document.addEventListener("visibilitychange", function () { if (document.hidden) { video.pause(); } else if (!userPaused) { tryPlay(); } });
+    }
+    if (pauseBtn) {
+      pauseBtn.addEventListener("click", function () {
+        userPaused = !userPaused;
+        if (userPaused) { video.pause(); } else { video.play(); }
+        pauseBtn.setAttribute("aria-pressed", String(userPaused));
+        pauseBtn.setAttribute("aria-label", userPaused ? "Relancer la vidéo" : "Mettre la vidéo en pause");
+      });
+    }
+  }
+
   /* -- Intro du héros (après le préchargeur) ---------------------------------- */
   var heroIntro = function (instant) {
-    var plates = document.querySelectorAll(".hero .plate--reveal");
-    var caps = document.querySelectorAll("[data-hero-cap]");
     var lines = document.querySelectorAll("[data-hero-line]");
-    if (!motion) {
-      plates.forEach(function (p) { p.style.clipPath = "none"; });
-      return;
-    }
-    var tl = gsap.timeline({ delay: instant ? 0.1 : 0 });
-    tl.from(lines[0], { xPercent: -18, opacity: 0, duration: 1.3, ease: "expo.out" }, 0)
-      .from(lines[1], { xPercent: 14, opacity: 0, duration: 1.3, ease: "expo.out" }, 0.12)
-      .to(plates, { clipPath: "inset(0% 0 0 0)", duration: 1.2, ease: "expo.inOut", stagger: 0.08 }, 0.25)
-      .from(caps, { y: 18, opacity: 0, duration: 0.9, ease: "expo.out", stagger: 0.06 }, 0.55);
+    var bits = document.querySelectorAll("[data-hero-anim]");
+    if (!motion) { return; }
+    gsap.timeline({ delay: instant ? 0.1 : 0 })
+      .from(lines, { yPercent: 110, duration: 1.2, ease: "expo.out", stagger: 0.1 }, 0)
+      .from(bits, { y: 24, opacity: 0, duration: 0.9, ease: "expo.out", stagger: 0.08 }, 0.3);
   };
 
   PC.runPreloader(heroIntro);

@@ -19,7 +19,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css?v=12">
+  <link rel="preload" as="image" href="assets/video/hero-poster.webp">
+  <link rel="stylesheet" href="assets/css/styles.css?v=13">
   <script>try{if(sessionStorage.getItem("pc-pt")==="1"){document.documentElement.classList.add("pt-arrive")}}catch(e){}</script>
   <script type="application/ld+json">
   {
@@ -42,7 +43,7 @@
   }
   </script>
 </head>
-<body>
+<body class="has-dark-hero">
   <div class="page-transition" aria-hidden="true"><img src="assets/img/logo-pcauto-noir.webp" alt="" width="491" height="389"></div>
   <a class="skip-link" href="#contenu">Aller au contenu</a>
 
@@ -56,6 +57,7 @@
     <div class="site-header__inner">
       <a class="brand" href="index.html" aria-label="PC Auto, accueil">
         <img src="assets/img/logo-pcauto.webp" alt="PC Auto" width="480" height="417">
+        <img class="brand__on-dark" src="assets/img/logo-pcauto-noir.webp" alt="" width="491" height="389">
       </a>
       <nav class="nav" aria-label="Navigation principale">
         <a href="#financement">Financement</a>
@@ -95,49 +97,33 @@
 
         <!-- (01) Héros -->
         <section class="hero" aria-labelledby="hero-title">
-          <div class="container">
-            <div class="hero__grid">
-              <h1 class="hero__title display" id="hero-title">
-                <span class="l1" data-hero-line>Rouler</span>
-                <span class="l2" data-hero-line>en confiance/</span>
-              </h1>
-
-              <div class="hero__meta">
-                <p class="caption" data-hero-cap>Inventaire<br><span data-count-total>25</span> véhicules</p>
-                <a href="vehicule.html?v=jeep-wrangler-2014-4" class="plate plate--reveal" data-hero aria-label="Jeep Wrangler 2014">
-                  <img src="assets/img/autos/thumb/jeep-wrangler-2014-4-11.webp" alt="Jeep Wrangler 2014 gris, vue de profil" width="720" height="498">
-                </a>
-              </div>
-
-              <a class="hero__left-plate" href="vehicule.html?v=kia-forte-2021-10">
-                <span class="plate plate--reveal" data-hero><img src="assets/img/autos/thumb/kia-forte-2021-10-01.webp" alt="Kia Forte 2021 grise, vue avant" width="720" height="498"></span>
-                <p class="caption" data-hero-cap>Kia Forte 2021<br><span data-price="16495">16 495 $</span></p>
-              </a>
-
-              <div class="hero__row">
-                <div class="hero__intro">
-                  <p data-hero-cap>Bienvenue chez PC Auto. Des véhicules d'occasion inspectés, garantis et financés sur place.</p>
-                  <a class="link-bracket" href="inventaire.html" data-hero-cap><span class="lb-bracket">[</span><span class="lb-text">Explorer l'inventaire</span><span class="lb-bracket">]</span></a>
-                </div>
-
-                <a class="hero__feature" href="vehicule.html?v=scion-fr-s-2014-1" data-cursor="Voir">
-                  <span class="plate plate--reveal" data-hero><img src="assets/img/autos/scion-fr-s-2014-1-05.webp" alt="Scion FR-S 2014 orange, vue de profil sur le terrain de PC Auto" width="940" height="650" fetchpriority="high"></span>
-                  <span class="hero__feature-cap caption" data-hero-cap><span>Coupé sport · 178 705 km</span><span data-price="12995">12 995 $</span></span>
-                </a>
-
-                <div class="hero__side">
-                  <div class="hero__side-head caption" data-hero-cap><span>Nouveaux arrivages</span><span aria-hidden="true">//</span></div>
-                  <div class="hero__side-plates" data-new-arrivals></div>
-                </div>
-              </div>
-
-              <div class="hero__stats" data-hero-cap>
-                <span><b data-count-total>25</b>véhicules en inventaire</span>
-                <span><b>2</b>succursales : Granby et Sainte-Eulalie</span>
-                <span><b>4</b>langues : français, anglais, espagnol, portugais</span>
-              </div>
+          <div class="hero__media" aria-hidden="true">
+            <video class="hero__video" autoplay muted loop playsinline preload="metadata" poster="assets/video/hero-poster.webp">
+              <source src="assets/video/hero.mp4" type="video/mp4">
+            </video>
+            <span class="hero__overlay"></span>
+          </div>
+          <div class="container hero__inner">
+            <p class="hero__eyebrow" data-hero-anim>Véhicules d'occasion · Granby et Sainte-Eulalie</p>
+            <h1 class="hero__title display" id="hero-title">
+              <span class="hero__line"><span data-hero-line>Rouler</span></span>
+              <span class="hero__line"><span data-hero-line>en confiance</span></span>
+            </h1>
+            <p class="hero__lead" data-hero-anim>Des véhicules inspectés, garantis et financés sur place, avec une équipe qui vous accompagne du premier appel jusqu'aux clés.</p>
+            <div class="hero__actions" data-hero-anim>
+              <a class="btn btn--red btn--lg" href="inventaire.html">Voir l'inventaire <i data-icon="arrow"></i></a>
+              <a class="btn btn--ghost-light btn--lg" href="#financement">Financement rapide</a>
+            </div>
+            <div class="hero__stats" data-hero-anim>
+              <span><b data-count-total>25</b>véhicules en inventaire</span>
+              <span><b>2</b>succursales : Granby et Sainte-Eulalie</span>
+              <span><b>100 %</b>financement sur place</span>
             </div>
           </div>
+          <button class="hero__pause" type="button" data-hero-pause aria-pressed="false" aria-label="Mettre la vidéo en pause">
+            <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+            <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10.5-6.5a1 1 0 0 0 0-1.8L9.5 4.6A1 1 0 0 0 8 5.5z"/></svg>
+          </button>
         </section>
 
         <!-- (02) Marques -->
@@ -512,9 +498,9 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
-  <script src="assets/js/data.js?v=12" defer></script>
-  <script src="assets/js/store.js?v=12" defer></script>
-  <script src="assets/js/main.js?v=12" defer></script>
-  <script src="assets/js/home.js?v=12" defer></script>
+  <script src="assets/js/data.js?v=13" defer></script>
+  <script src="assets/js/store.js?v=13" defer></script>
+  <script src="assets/js/main.js?v=13" defer></script>
+  <script src="assets/js/home.js?v=13" defer></script>
 </body>
 </html>

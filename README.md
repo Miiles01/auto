@@ -22,6 +22,9 @@ Tout l'inventaire est dans `assets/js/data.js`. Chaque véhicule a son prix, kil
 
 Après une modification de CSS ou JS, augmentez le numéro `?v=` dans les trois pages HTML pour forcer les navigateurs à recharger les fichiers.
 
+## Vidéo de l'accueil
+`assets/video/hero.mp4` (1280×720, 25 s, sans son) est un montage des photos du terrain. Pour utiliser une vraie vidéo du concessionnaire, remplacez ce fichier (MP4 H.264, idéalement moins de 5 Mo) et `assets/video/hero-poster.webp` (image affichée pendant le chargement et en mode « mouvement réduit »).
+
 ## Formulaire
 Le formulaire ouvre WhatsApp (450 378-0888) avec le message prérempli : aucun serveur requis.
 
