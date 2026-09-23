@@ -336,7 +336,18 @@ ul, ol { padding: 0; list-style: none; }
   overflow: hidden;
 }
 .hero__media { position: absolute; inset: 0; z-index: -1; }
-.hero__video { width: 100%; height: 100%; object-fit: cover; }
+.hero__media { background: #000 url("../video/hero-poster.webp") center / cover no-repeat; }
+.hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 800ms var(--ease-out); }
+.hero__video.is-on { opacity: 1; }
+/* Vidéo YouTube en fond : format 16:9 étiré pour couvrir, agrandie pour masquer les bords du lecteur */
+.hero__yt { position: absolute; inset: 0; overflow: hidden; opacity: 0; transition: opacity 900ms var(--ease-out); pointer-events: none; }
+.hero__yt.is-on { opacity: 1; }
+.hero__yt iframe {
+  position: absolute; left: 50%; top: 50%;
+  width: max(100%, 177.78vh); height: max(100%, 56.25vw);
+  transform: translate(-50%, -50%) scale(1.18);
+  border: 0; pointer-events: none;
+}
 .hero__overlay {
   position: absolute; inset: 0;
   background:
@@ -346,7 +357,7 @@ ul, ol { padding: 0; list-style: none; }
 .hero__inner { position: relative; display: grid; gap: clamp(1.25rem, 2vw, 1.75rem); justify-items: start; }
 .hero__eyebrow { font-size: 0.9375rem; color: rgba(255, 255, 255, 0.8); }
 .hero__title { font-size: clamp(3.75rem, 10.5vw, 10.5rem); color: #fff; }
-.hero__line { display: block; overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; }
+.hero__line { display: block; overflow: hidden; padding: 0 0.12em 0.1em 0; margin: 0 -0.12em -0.1em 0; }
 .hero__line > span { display: block; }
 .hero__lead { max-width: 34rem; font-size: clamp(1.0625rem, 1.4vw, 1.25rem); line-height: 1.5; color: rgba(255, 255, 255, 0.85); }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
@@ -841,8 +852,7 @@ ul, ol { padding: 0; list-style: none; }
   .js [data-reveal] { opacity: 1; transform: none; }
   .page-transition { display: none; }
   .plate--reveal { clip-path: none; }
-  .hero__video { display: none; }
-  .hero__media { background: url("../video/hero-poster.webp") center / cover no-repeat; }
+  .hero__video, .hero__yt { display: none; }
   .hero__pause { display: none; }
   .manifesto .word { opacity: 1; }
   .marquee { animation: none; flex-wrap: wrap; justify-content: center; width: auto; }

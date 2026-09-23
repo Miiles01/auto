@@ -177,33 +177,88 @@
     });
   }
 
-  /* -- Vidéo du héros : pause hors écran, bouton pause, mouvement réduit -------- */
-  var video = document.querySelector(".hero__video");
+  /* -- Vidéo du héros -----------------------------------------------------------
+     Vidéo YouTube en fond (extrait 0–5 s en boucle, muet), comme sur l'ancien
+     site. L'image fixe reste visible tant que la lecture n'a pas commencé ; si
+     YouTube ne répond pas, la vidéo locale du terrain prend le relais. */
+  var ytBox = document.querySelector(".hero__yt");
+  var localVideo = document.querySelector("[data-fallback-video]");
   var pauseBtn = document.querySelector("[data-hero-pause]");
+  var heroEl = document.querySelector(".hero");
+  var player = null;
+  var mode = "none"; /* "yt" | "local" | "none" */
   var userPaused = false;
-  if (video) {
-    if (PC.reduceMotion) {
-      video.removeAttribute("autoplay");
-      video.pause();
-    } else {
-      var tryPlay = function () { var p = video.play(); if (p && p.catch) { p.catch(function () { /* lecture bloquée : l'affiche reste visible */ }); } };
-      if ("IntersectionObserver" in window) {
-        new IntersectionObserver(function (entries) {
-          entries.forEach(function (en) {
-            if (en.isIntersecting && !userPaused) { tryPlay(); } else { video.pause(); }
-          });
-        }, { threshold: 0.1 }).observe(video);
-      }
-      document.addEventListener("visibilitychange", function () { if (document.hidden) { video.pause(); } else if (!userPaused) { tryPlay(); } });
-    }
-    if (pauseBtn) {
-      pauseBtn.addEventListener("click", function () {
-        userPaused = !userPaused;
-        if (userPaused) { video.pause(); } else { video.play(); }
-        pauseBtn.setAttribute("aria-pressed", String(userPaused));
-        pauseBtn.setAttribute("aria-label", userPaused ? "Relancer la vidéo" : "Mettre la vidéo en pause");
+  var inView = true;
+
+  var playNow = function () {
+    if (userPaused || !inView || document.hidden) { return; }
+    if (mode === "yt" && player && player.playVideo) { player.playVideo(); }
+    if (mode === "local") { var p = localVideo.play(); if (p && p.catch) { p.catch(function () {}); } }
+  };
+  var pauseNow = function () {
+    if (mode === "yt" && player && player.pauseVideo) { player.pauseVideo(); }
+    if (mode === "local") { localVideo.pause(); }
+  };
+  var useLocal = function () {
+    if (mode === "local" || !localVideo) { return; }
+    mode = "local";
+    if (ytBox) { ytBox.remove(); }
+    localVideo.preload = "auto";
+    localVideo.classList.add("is-on");
+    playNow();
+  };
+
+  if (ytBox && !PC.reduceMotion) {
+    var ytId = ytBox.getAttribute("data-yt-id");
+    var ytStart = +ytBox.getAttribute("data-yt-start") || 0;
+    var ytEnd = +ytBox.getAttribute("data-yt-end") || 0;
+    var fallbackTimer = setTimeout(useLocal, 8000);
+    var prevReady = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = function () {
+      if (prevReady) { prevReady(); }
+      if (mode === "local") { return; }
+      player = new YT.Player("hero-yt", {
+        host: "https://www.youtube-nocookie.com",
+        videoId: ytId,
+        playerVars: {
+          autoplay: 1, mute: 1, controls: 0, disablekb: 1, fs: 0, rel: 0, modestbranding: 1,
+          iv_load_policy: 3, playsinline: 1, start: ytStart, end: ytEnd || undefined, origin: location.origin
+        },
+        events: {
+          onReady: function (e) { e.target.mute(); playNow(); },
+          onStateChange: function (e) {
+            if (e.data === YT.PlayerState.PLAYING) {
+              clearTimeout(fallbackTimer);
+              mode = "yt";
+              ytBox.classList.add("is-on");
+            }
+            if (e.data === YT.PlayerState.ENDED) { e.target.seekTo(ytStart, true); if (!userPaused) { e.target.playVideo(); } }
+          },
+          onError: function () { clearTimeout(fallbackTimer); useLocal(); }
+        }
       });
-    }
+    };
+    var tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    tag.onerror = function () { clearTimeout(fallbackTimer); useLocal(); };
+    document.head.appendChild(tag);
+  }
+
+  if (heroEl && "IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      inView = entries[0].isIntersecting;
+      if (inView) { playNow(); } else { pauseNow(); }
+    }, { threshold: 0.1 }).observe(heroEl);
+  }
+  document.addEventListener("visibilitychange", function () { if (document.hidden) { pauseNow(); } else { playNow(); } });
+  if (pauseBtn) {
+    if (PC.reduceMotion) { pauseBtn.hidden = true; }
+    pauseBtn.addEventListener("click", function () {
+      userPaused = !userPaused;
+      if (userPaused) { pauseNow(); } else { playNow(); }
+      pauseBtn.setAttribute("aria-pressed", String(userPaused));
+      pauseBtn.setAttribute("aria-label", userPaused ? "Relancer la vidéo" : "Mettre la vidéo en pause");
+    });
   }
 
   /* -- Intro du héros (après le préchargeur) ---------------------------------- */

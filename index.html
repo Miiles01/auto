@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/video/hero-poster.webp">
-  <link rel="stylesheet" href="assets/css/styles.css?v=13">
+  <link rel="stylesheet" href="assets/css/styles.css?v=14">
   <script>try{if(sessionStorage.getItem("pc-pt")==="1"){document.documentElement.classList.add("pt-arrive")}}catch(e){}</script>
   <script type="application/ld+json">
   {
@@ -98,7 +98,8 @@
         <!-- (01) Héros -->
         <section class="hero" aria-labelledby="hero-title">
           <div class="hero__media" aria-hidden="true">
-            <video class="hero__video" autoplay muted loop playsinline preload="metadata" poster="assets/video/hero-poster.webp">
+            <div class="hero__yt" data-yt-id="B4A_xzbx6e8" data-yt-start="0" data-yt-end="5"><div id="hero-yt"></div></div>
+            <video class="hero__video" muted loop playsinline preload="none" poster="assets/video/hero-poster.webp" data-fallback-video>
               <source src="assets/video/hero.mp4" type="video/mp4">
             </video>
             <span class="hero__overlay"></span>
@@ -496,6 +497,6 @@
   <script src="assets/js/data.js?v=13" defer></script>
   <script src="assets/js/store.js?v=13" defer></script>
   <script src="assets/js/main.js?v=13" defer></script>
-  <script src="assets/js/home.js?v=13" defer></script>
+  <script src="assets/js/home.js?v=14" defer></script>
 </body>
 </html>
