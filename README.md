@@ -1,35 +1,22 @@
-# PC Auto — site web
+# PC Auto — maquette HTML/CSS pour WordPress
 
-Site statique (HTML, CSS, JavaScript) pour PC Auto, Granby et Sainte-Eulalie. Aucune compilation : les fichiers se déploient tels quels sur Hostinger (Custom PHP/HTML).
+Version **sans JavaScript** du site, préparée pour être transférée dans un thème WordPress. La version animée (GSAP, préchargeur, panneau d'administration de démo) est conservée dans la branche `version-animada`.
 
-## Pages
-- `index.html` : accueil (héros, catégories, inventaire en vedette, services, inspection, financement, formulaire, marques, succursales)
-- `inventaire.html` : inventaire complet avec recherche, filtres et tri (liens partageables : `?type=vus`, `?succursale=Granby`, `?prix=8000`, `?q=kia`)
-- `vehicule.html?v=<slug>` : fiche véhicule (galerie, caractéristiques, options, calculateur de paiements)
+## Contenu
+- `index.html` : accueil
+- `inventaire.html` : liste des véhicules (filtres = maquette statique, à brancher sur un plugin de filtres)
+- `vehicule-<slug>.html` : une fiche par véhicule (modèle pour le gabarit « single » d'un type de contenu *Véhicule*)
+- `assets/css/styles.css` : seule feuille de style
+- `assets/img`, `assets/video` : médias
 
-## Administration (démo)
-`/admin` ouvre la connexion (identifiants préremplis : `admin@pcauto.ca` / `demo-pcauto`), puis le panneau :
-- **Tableau de bord** : véhicules en ligne, valeur de l'inventaire, prix moyen, demandes, activité, fiches à compléter.
-- **Inventaire** : prix modifiables directement dans le tableau, statut (en ligne, réservé, vendu, brouillon), vedette, recherche, filtres, tri et actions groupées.
-- **Ajouter / modifier** : fiche complète, photos (compressées, réordonnables), options, aperçu en direct.
-- **Demandes** : formulaire du site et boutons « Réserver un essai routier », avec suivi et notes.
-- **Réglages** : véhicules en préparation, taux du calculateur, export JSON, réinitialisation.
+## Retiré par rapport à la version animée
+Tout le JavaScript (`assets/js`), le panneau `/admin`, le préchargeur, la transition entre pages, le défilement doux, le curseur « Voir », le lecteur YouTube du héros (remplacé par `hero.mp4` en lecture automatique), la bascule CAD/USD, le calculateur de paiements, la visionneuse de photos, ainsi que les balises `canonical`, `og:*` et JSON-LD (à laisser à Yoast / Rank Math).
 
-Démo sans serveur : tout est enregistré dans le navigateur (`localStorage`, clé `pc-admin-v1`) via `assets/js/store.js`, puis appliqué au site public. Pour une gestion partagée, brancher une base de données (PHP + SQLite sur Hostinger) et une vraie authentification.
+## Interactions restantes (CSS seulement)
+Menu mobile (`:target`), survol des catégories et des services, points d'inspection, carrousel de témoignages (défilement horizontal), défilement des marques.
 
-## Mettre l'inventaire à jour
-Tout l'inventaire est dans `assets/js/data.js`. Chaque véhicule a son prix, kilométrage, options et la liste de ses photos (`assets/img/autos/` en 940 px et `assets/img/autos/thumb/` en 720 px, format WebP). Pour retirer un véhicule vendu, supprimez son bloc ; pour en ajouter un, copiez un bloc existant.
-
-Après une modification de CSS ou JS, augmentez le numéro `?v=` dans les trois pages HTML pour forcer les navigateurs à recharger les fichiers.
-
-## Vidéo de l'accueil
-`assets/video/hero.mp4` (1280×720, 25 s, sans son) est un montage des photos du terrain. Pour utiliser une vraie vidéo du concessionnaire, remplacez ce fichier (MP4 H.264, idéalement moins de 5 Mo) et `assets/video/hero-poster.webp` (image affichée pendant le chargement et en mode « mouvement réduit »).
-
-## Témoignages (exemples)
-Le composant `assets/js/temoignages.js` s'affiche sur l'accueil et en bas de l'inventaire (conteneur `data-temoignages`). **Les six témoignages sont des exemples de démonstration** (photos d'illustration dans `assets/img/avatars/`) : avant la mise en ligne publique, les remplacer par de vrais avis clients, avec leur accord.
-
-## Formulaire
-Le formulaire ouvre WhatsApp (450 378-0888) avec le message prérempli : aucun serveur requis.
-
-## Déploiement
-La branche `deploy` est synchronisée avec Hostinger. Travailler sur `main`, puis fusionner dans `deploy`.
+## À faire côté WordPress
+- Véhicules : type de contenu personnalisé (ACF / JetEngine) ; les cartes `.car-card` et la fiche `vehicule-*.html` servent de gabarits.
+- Formulaire : remplacer le `<form>` par Contact Form 7 ou WPForms.
+- Filtres de l'inventaire : plugin (JetSmartFilters, FacetWP…).
+- Les 6 témoignages sont des exemples : les remplacer par de vrais avis.
