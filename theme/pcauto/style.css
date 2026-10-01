@@ -1,0 +1,22 @@
+/*
+Theme Name: PC Auto
+Description: Thème sur mesure pour PC Auto (Granby et Sainte-Eulalie). Inventaire de véhicules, fiches, formulaire de contact. Compatible Elementor pour les autres pages.
+Version: 1.0.0
+Text Domain: pcauto
+Requires PHP: 7.4
+*/
+
+/* Barre d'administration WordPress : l'en-tête fixe se décale */
+.admin-bar .site-header { top: 32px; }
+.admin-bar .mobile-menu { top: 32px; }
+@media (max-width: 782px) { .admin-bar .site-header, .admin-bar .mobile-menu { top: 46px; } }
+
+/* Pages génériques / Elementor : dégage l'en-tête fixe */
+.pc-page { padding-top: var(--header-h); }
+.pc-page--default { padding-bottom: 4rem; }
+.pc-page--default .container { padding-top: 3rem; }
+
+/* Messages du formulaire */
+.form__status.is-visible { display: block; }
+.form__status--error { color: var(--accent-strong); }
+.pc-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
