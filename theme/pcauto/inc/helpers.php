@@ -187,3 +187,50 @@ function pc_browse_plate($side) {
         echo pc_img($att, 'pc-card', '', $i === 1 ? ['class' => 'is-on'] : []);
     }
 }
+
+/* ---- Succursales -------------------------------------------------------- */
+function pc_branches() {
+    $hours = [['Lun. au ven.', '8 h 00 – 18 h 00'], ['Samedi', '10 h 00 – 13 h 00, sur rendez-vous'], ['Dimanche', 'Fermé']];
+    return [
+        'granby' => [
+            'key' => 'granby', 'name' => 'Granby', 'other' => 'sainte-eulalie', 'url' => home_url('/granby/'),
+            'street' => '1297, rue Principale', 'city' => 'Granby (Québec) J2J 0M3',
+            'query' => '1297 rue Principale, Granby, QC J2J 0M3', 'hours' => $hours,
+        ],
+        'sainte-eulalie' => [
+            'key' => 'sainte-eulalie', 'name' => 'Sainte-Eulalie', 'other' => 'granby', 'url' => home_url('/sainte-eulalie/'),
+            'street' => '315, rue des Bouleaux', 'city' => 'Sainte-Eulalie (Québec) G0Z 1E0',
+            'query' => '315 rue des Bouleaux, Sainte-Eulalie, QC G0Z 1E0', 'hours' => $hours,
+        ],
+    ];
+}
+function pc_branch_by_name($name) {
+    foreach (pc_branches() as $b) { if ($b['name'] === $name) { return $b; } }
+    return null;
+}
+
+/* ---- Blog ---------------------------------------------------------------- */
+function pc_blog_url() {
+    $id = (int) get_option('page_for_posts');
+    return $id ? get_permalink($id) : home_url('/blog/');
+}
+function pc_read_time($post_id) {
+    $words = str_word_count(wp_strip_all_tags(get_post_field('post_content', $post_id)));
+    return max(1, (int) ceil($words / 200));
+}
+function pc_post_card($id = null) {
+    $id = $id ?: get_the_ID();
+    $cats = get_the_category($id);
+    ob_start(); ?>
+<article class="post-card">
+  <a class="post-card__media" href="<?php echo esc_url(get_permalink($id)); ?>" tabindex="-1" aria-hidden="true">
+    <?php if (has_post_thumbnail($id)) { echo get_the_post_thumbnail($id, 'pc-card', ['loading' => 'lazy', 'alt' => '']); } else { ?><span class="post-card__ph"><?php echo esc_html(get_bloginfo('name')); ?></span><?php } ?>
+  </a>
+  <div class="post-card__meta"><?php if ($cats) : ?><a class="chip" href="<?php echo esc_url(get_category_link($cats[0])); ?>"><?php echo esc_html($cats[0]->name); ?></a><?php endif; ?><time datetime="<?php echo esc_attr(get_the_date('c', $id)); ?>"><?php echo esc_html(get_the_date('j F Y', $id)); ?></time></div>
+  <h3 class="post-card__title"><a href="<?php echo esc_url(get_permalink($id)); ?>"><?php echo esc_html(get_the_title($id)); ?></a></h3>
+  <p class="post-card__excerpt"><?php echo esc_html(wp_trim_words(get_the_excerpt($id), 24)); ?></p>
+  <a class="car-card__more post-card__more" href="<?php echo esc_url(get_permalink($id)); ?>">Lire l’article <?php echo pc_icon('arrow'); ?></a>
+</article>
+<?php
+    return ob_get_clean();
+}

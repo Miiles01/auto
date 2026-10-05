@@ -289,7 +289,7 @@ if (pc_is_elementor($pc_front_id)) : ?>
                   </dl>
                   <div class="location__foot">
                     <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=1297+rue+Principale,+Granby,+QC+J2J+0M3" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Itinéraire</a>
-                    <a class="btn btn--ghost" href="<?php echo esc_url(home_url('/inventaire/?succursale=Granby')); ?>">Véhicules à Granby</a>
+                    <a class="btn btn--ghost" href="<?php echo esc_url(home_url('/granby/')); ?>">Voir la succursale de Granby</a>
                   </div>
                 </div>
               </article>
@@ -306,7 +306,7 @@ if (pc_is_elementor($pc_front_id)) : ?>
                   </dl>
                   <div class="location__foot">
                     <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=315+rue+des+Bouleaux,+Sainte-Eulalie,+QC+G0Z+1E0" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Itinéraire</a>
-                    <a class="btn btn--ghost" href="<?php echo esc_url(home_url('/inventaire/?succursale=Sainte-Eulalie')); ?>">Véhicules à Sainte-Eulalie</a>
+                    <a class="btn btn--ghost" href="<?php echo esc_url(home_url('/sainte-eulalie/')); ?>">Voir la succursale de Sainte-Eulalie</a>
                   </div>
                 </div>
               </article>

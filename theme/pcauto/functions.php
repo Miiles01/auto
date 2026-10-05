@@ -23,7 +23,7 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('pc-fonts', 'https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap', [], null);
     $css = get_theme_file_path('assets/css/styles.css');
     wp_enqueue_style('pc-design', get_theme_file_uri('assets/css/styles.css'), [], file_exists($css) ? filemtime($css) : '1');
-    wp_enqueue_style('pc-theme', get_stylesheet_uri(), ['pc-design'], wp_get_theme()->get('Version'));
+    wp_enqueue_style('pc-theme', get_stylesheet_uri(), ['pc-design'], filemtime(get_stylesheet_directory() . '/style.css'));
     if (class_exists('WooCommerce')) {
         $wc = get_theme_file_path('assets/css/woocommerce.css');
         wp_enqueue_style('pc-woo', get_theme_file_uri('assets/css/woocommerce.css'), ['pc-theme'], file_exists($wc) ? filemtime($wc) : '1');

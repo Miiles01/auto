@@ -1,6 +1,7 @@
-<?php $selected = (int) ($args['selected'] ?? 0); ?>
+<?php $selected = (int) ($args['selected'] ?? 0); $branch = $args['succursale'] ?? ''; ?>
 <form class="form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
   <input type="hidden" name="action" value="pc_contact">
+  <?php if ($branch) : ?><input type="hidden" name="succursale" value="<?php echo esc_attr($branch); ?>"><?php endif; ?>
   <?php wp_nonce_field('pc_contact', 'pc_nonce'); ?>
   <div class="pc-hp" aria-hidden="true"><label>Ne pas remplir<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
                 <div class="field">
@@ -29,7 +30,7 @@
                   <label for="f-vehicule">Véhicule qui vous intéresse</label>
                   <select id="f-vehicule" name="vehicule">
           <option value="">Aucun en particulier</option>
-          <?php foreach (pc_ids([], -1, 'recent') as $vid) : $vc = pc_car($vid); ?>
+          <?php foreach (pc_ids($branch ? ['succursale' => $branch] : [], -1, 'recent') as $vid) : $vc = pc_car($vid); ?>
             <option value="<?php echo (int) $vid; ?>"<?php selected($selected, $vid); ?>><?php echo esc_html($vc['name'] . ' ' . $vc['year'] . ' — ' . pc_price($vc['price'])); ?></option>
           <?php endforeach; ?>
         </select>

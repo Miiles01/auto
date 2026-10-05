@@ -20,3 +20,80 @@ Requires PHP: 7.4
 .form__status.is-visible { display: block; }
 .form__status--error { color: var(--accent-strong); }
 .pc-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* ==== Menu « Succursales » (desktop, CSS seul) ========================== */
+.nav__drop { position: relative; display: flex; align-items: center; }
+.nav__menu {
+  position: absolute; top: 100%; left: 50%; transform: translate(-50%, 0.5rem); min-width: 15rem;
+  background: var(--bg-raised); color: var(--fg); border-radius: var(--radius); padding: 0.5rem;
+  box-shadow: 0 18px 50px rgba(20, 19, 15, 0.18); display: grid; gap: 0.125rem;
+  opacity: 0; visibility: hidden; transition: opacity var(--dur-fast), transform var(--dur-fast), visibility 0s linear var(--dur-fast);
+}
+.nav__drop:hover .nav__menu, .nav__drop:focus-within .nav__menu { opacity: 1; visibility: visible; transform: translate(-50%, 0); transition-delay: 0s; }
+.nav__menu a { display: grid; gap: 0.125rem; padding: 0.75rem 1rem; border-radius: 6px; font-family: var(--font-sans); font-size: 0.9375rem; }
+.nav__menu a::after { display: none; }
+.nav__menu a b { font-family: var(--font-display); font-size: 1.25rem; line-height: 1; color: var(--accent); }
+.nav__menu a span { font-size: 0.8125rem; color: var(--fg-muted); font-weight: 400; }
+.nav__menu a:hover { background: rgba(222, 4, 25, 0.08); }
+
+/* ==== Landing de succursale ============================================== */
+.hero--branch .hero__title { font-size: clamp(2.75rem, 10vw, 9.5rem); }
+.hero--branch .hero__media { background-size: cover; background-position: center; }
+.locations--single { grid-template-columns: 1fr; }
+.locations--single .location { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); grid-template-rows: auto; }
+.locations--single .location__map { aspect-ratio: auto; min-height: 22rem; }
+.locations--single .location__body { align-content: center; padding: clamp(1.5rem, 3vw, 3rem); }
+@media (max-width: 860px) {
+  .locations--single .location { grid-template-columns: 1fr; }
+  .locations--single .location__map { aspect-ratio: 1.6; min-height: 0; }
+}
+.branch-switch { padding-block: clamp(3rem, 7vw, 6rem); }
+.branch-switch__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2rem; }
+.branch-switch__title { font-size: clamp(2.75rem, 7vw, 6rem); color: var(--on-accent); }
+.branch-switch__text { margin-top: 0.75rem; max-width: 34rem; opacity: 0.9; }
+.branch-switch__links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+/* ==== Blog ================================================================= */
+.post-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(2rem, 3vw, 3rem) var(--gutter); }
+.post-card { display: flex; flex-direction: column; gap: 0.875rem; }
+.post-card__media { display: block; aspect-ratio: 1.446; overflow: hidden; background: var(--rule); border-radius: 2px; }
+.post-card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 900ms var(--ease-out); }
+.post-card:hover .post-card__media img { transform: scale(1.04); }
+.post-card__ph { display: grid; place-items: center; height: 100%; font-family: var(--font-display); font-size: 2rem; color: var(--accent); }
+.post-card__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.875rem; font-size: 0.8125rem; color: var(--fg-muted); }
+.post-card__title { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.625rem, 2.2vw, 2.125rem); line-height: 1; letter-spacing: -0.03em; }
+.post-card__title a:hover { color: var(--accent); }
+.post-card__excerpt { color: var(--fg-muted); font-size: 0.9375rem; line-height: 1.5; }
+.post-card__more { margin-top: auto; }
+.navigation.pagination { margin-top: clamp(2.5rem, 5vw, 4rem); }
+.navigation.pagination .nav-links { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+.navigation.pagination .page-numbers { min-width: 2.75rem; min-height: 2.75rem; padding: 0 1rem; display: inline-grid; place-items: center; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--fg); font-size: 0.9375rem; }
+.navigation.pagination .page-numbers.current, .navigation.pagination a.page-numbers:hover { background: var(--fg); color: var(--bg); }
+.navigation.pagination .dots { box-shadow: none; }
+
+.post { padding-top: calc(var(--header-h) + clamp(1.5rem, 3vw, 2.5rem)); padding-bottom: clamp(2rem, 5vw, 4rem); }
+.post__container { max-width: 52rem; }
+.post__head { display: grid; gap: 1.25rem; margin-bottom: 2rem; }
+.post__title { font-size: clamp(2.75rem, 7vw, 5.5rem); color: var(--accent); }
+.post__lead { font-family: var(--font-serif); font-size: clamp(1.25rem, 2vw, 1.625rem); line-height: 1.35; }
+.post__cover { margin: 0 0 2.5rem; }
+.post__cover img { width: 100%; height: auto; border-radius: 2px; }
+.post__foot { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); font-size: 0.9375rem; }
+
+.entry { font-size: 1.125rem; line-height: 1.7; }
+.entry > * + * { margin-top: 1.25em; }
+.entry h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1; letter-spacing: -0.03em; margin-top: 2em; color: var(--accent); }
+.entry h3 { font-family: var(--font-serif); font-weight: 400; font-size: 1.75rem; line-height: 1.15; margin-top: 1.75em; }
+.entry a { color: var(--accent-strong); text-decoration: underline; text-underline-offset: 3px; }
+.entry ul, .entry ol { padding-left: 1.4em; }
+.entry ul { list-style: disc; }
+.entry ol { list-style: decimal; }
+.entry li + li { margin-top: 0.4em; }
+.entry blockquote { border-left: 3px solid var(--accent); padding: 0.25rem 0 0.25rem 1.5rem; font-family: var(--font-serif); font-size: 1.5rem; line-height: 1.3; }
+.entry img, .entry figure img { max-width: 100%; height: auto; border-radius: 2px; }
+.entry figcaption { font-size: 0.875rem; color: var(--fg-muted); margin-top: 0.5rem; }
+.entry table { width: 100%; border-collapse: collapse; font-size: 1rem; }
+.entry th, .entry td { text-align: left; padding: 0.625rem 0.75rem; border-bottom: 1px solid var(--rule); }
+
+@media (max-width: 1024px) { .post-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .post-grid { grid-template-columns: 1fr; } .entry { font-size: 1.0625rem; } }

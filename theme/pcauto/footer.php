@@ -28,8 +28,9 @@
               <ul>
                 <li><a class="link-underline" href="tel:+14503780888">450 378-0888</a></li>
                 <li><a class="link-underline" href="https://api.whatsapp.com/send?phone=14503780888&amp;text=" target="_blank" rel="noopener">WhatsApp</a></li>
-                <li>1297, rue Principale, Granby</li>
-                <li>315, rue des Bouleaux, Sainte-Eulalie</li>
+                <li><a class="link-underline" href="<?php echo esc_url(home_url('/granby/')); ?>">Granby — 1297, rue Principale</a></li>
+                <li><a class="link-underline" href="<?php echo esc_url(home_url('/sainte-eulalie/')); ?>">Sainte-Eulalie — 315, rue des Bouleaux</a></li>
+                <li><a class="link-underline" href="<?php echo esc_url(pc_blog_url()); ?>">Blog</a></li>
               </ul>
             </div>
           </div>

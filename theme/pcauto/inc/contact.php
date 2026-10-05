@@ -21,6 +21,8 @@ function pc_handle_contact() {
     $sujet = sanitize_text_field(wp_unslash($_POST['sujet'] ?? ''));
     $msg = sanitize_textarea_field(wp_unslash($_POST['message'] ?? ''));
     $vid = absint($_POST['vehicule'] ?? 0);
+    $suc = sanitize_text_field(wp_unslash($_POST['succursale'] ?? ''));
+    if (!in_array($suc, ['Granby', 'Sainte-Eulalie'], true)) { $suc = ''; }
 
     if ($nom === '' || strlen(preg_replace('/\D/', '', $tel)) < 10 || !is_email($mail)) { $go('erreur'); }
 
@@ -29,12 +31,13 @@ function pc_handle_contact() {
         $c = pc_car($vid);
         $lines[] = 'Véhicule : ' . $c['name'] . ' ' . $c['year'] . ' (stock ' . $c['stock'] . ', ' . html_entity_decode(pc_price($c['price'])) . ') ' . get_permalink($vid);
     }
+    if ($suc !== '') { $lines[] = "Succursale : $suc"; }
     if ($sujet !== '') { $lines[] = "Sujet : $sujet"; }
     if ($msg !== '') { $lines[] = ''; $lines[] = $msg; }
 
     $to = get_theme_mod('pc_contact_email') ?: get_option('admin_email');
     $headers = ['Content-Type: text/plain; charset=UTF-8', 'Reply-To: ' . $nom . ' <' . $mail . '>'];
-    $ok = wp_mail($to, '[PC Auto] ' . ($sujet ?: 'Demande d’information') . ' — ' . $nom, implode("\n", $lines), $headers);
+    $ok = wp_mail($to, '[PC Auto' . ($suc ? ' ' . $suc : '') . '] ' . ($sujet ?: 'Demande d’information') . ' — ' . $nom, implode("\n", $lines), $headers);
 
     $go($ok ? 'envoye' : 'erreur');
 }
