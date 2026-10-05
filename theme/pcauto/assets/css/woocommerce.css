@@ -1,0 +1,47 @@
+/* PC Auto — habillage de WooCommerce (boutique, fiche produit, panier, caisse) */
+.pc-shop .woocommerce-products-header__title, .pc-shop .product_title, .pc-page--default .woocommerce h2 { font-family: var(--font-display); font-weight: 700; color: var(--accent); letter-spacing: -0.03em; }
+.pc-shop .woocommerce-products-header__title { font-size: clamp(3rem, 8vw, 6rem); margin-bottom: 1.5rem; }
+.pc-shop .woocommerce-breadcrumb { font-size: 0.875rem; color: var(--fg-muted); margin-bottom: 1rem; }
+.pc-shop .woocommerce-result-count, .pc-shop .woocommerce-ordering { margin-bottom: 1.5rem; font-size: 0.9375rem; }
+.pc-shop .woocommerce-ordering select { background: var(--bg-raised); padding: 0.5rem 0.75rem; border-radius: var(--radius); }
+
+/* Grille de produits */
+.woocommerce ul.products { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 2rem 1.5rem; list-style: none; margin: 0 0 3rem; padding: 0; }
+.woocommerce ul.products::before, .woocommerce ul.products::after { display: none; }
+.woocommerce ul.products li.product { margin: 0; width: auto; float: none; }
+.woocommerce ul.products li.product img { width: 100%; height: auto; aspect-ratio: 1.446; object-fit: cover; border-radius: 2px; margin-bottom: 0.75rem; }
+.woocommerce ul.products li.product .woocommerce-loop-product__title { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; letter-spacing: -0.03em; }
+.woocommerce .price { font-family: var(--font-display); font-weight: 700; font-size: 1.375rem; color: var(--fg); }
+.woocommerce .price del { opacity: 0.5; font-size: 0.9em; }
+.woocommerce .price ins { text-decoration: none; }
+.woocommerce span.onsale { background: var(--accent); color: var(--on-accent); border-radius: 999px; min-height: 0; min-width: 0; line-height: 1; padding: 0.4rem 0.75rem; font-size: 0.75rem; top: 0.75rem; left: 0.75rem; right: auto; }
+
+/* Boutons */
+.woocommerce a.button, .woocommerce button.button, .woocommerce input.button, .woocommerce #respond input#submit,
+.wc-block-components-button:not(.is-link), .wp-block-button__link {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  background: var(--accent); color: var(--on-accent); border-radius: 999px; border: 0;
+  padding: 0.75rem 1.5rem; font-weight: 600; font-size: 0.9375rem; line-height: 1.2; cursor: pointer;
+  transition: background var(--dur-fast);
+}
+.woocommerce a.button:hover, .woocommerce button.button:hover, .woocommerce input.button:hover,
+.wc-block-components-button:not(.is-link):hover, .wp-block-button__link:hover { background: var(--accent-strong); color: var(--on-accent); }
+.woocommerce a.button.alt, .woocommerce button.button.alt { background: var(--accent); }
+
+/* Fiche produit */
+.woocommerce div.product div.images img { border-radius: 2px; }
+.woocommerce div.product .product_title { font-size: clamp(2.25rem, 5vw, 4rem); }
+.woocommerce div.product p.price, .woocommerce div.product span.price { font-size: 2rem; color: var(--accent); }
+.woocommerce div.product form.cart { display: flex; gap: 0.75rem; align-items: center; margin: 1.5rem 0; }
+.woocommerce .quantity .qty { width: 4.5rem; padding: 0.7rem; background: var(--bg-raised); border: 1px solid var(--rule); border-radius: var(--radius); }
+.woocommerce-tabs ul.tabs { padding-left: 0; }
+.woocommerce-tabs ul.tabs li { background: transparent; border-color: var(--rule); }
+.woocommerce-tabs ul.tabs li.active a { color: var(--accent-strong); }
+
+/* Panier, caisse, compte, messages */
+.woocommerce table.shop_table { border-color: var(--rule); border-radius: var(--radius); background: var(--bg-raised); }
+.woocommerce form .form-row input.input-text, .woocommerce form .form-row textarea, .woocommerce form .form-row select { background: var(--bg-raised); border: 1px solid var(--rule); border-radius: var(--radius); padding: 0.75rem; }
+.woocommerce-message, .woocommerce-info, .woocommerce-error { background: var(--bg-raised); border-top-color: var(--accent); color: var(--fg); }
+.woocommerce-message::before, .woocommerce-info::before { color: var(--accent); }
+.wc-block-cart, .wc-block-checkout { font-family: var(--font-sans); }
+.pc-page--default .woocommerce { padding-bottom: 2rem; }
