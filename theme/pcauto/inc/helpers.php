@@ -20,7 +20,8 @@ function pc_body_label($k) {
     return $l[$k] ?? '';
 }
 function pc_prep_count() { return (int) get_theme_mod('pc_prep_count', 5); }
-function pc_total() { return (int) wp_count_posts('vehicule')->publish; }
+function pc_total() { return count(pc_ids()); }
+function pc_is_vehicle($id) { return get_post_meta($id, 'pc_year', true) !== ''; }
 
 function pc_is_elementor($id) {
     if (!$id || !class_exists('\Elementor\Plugin')) { return false; }
@@ -28,34 +29,39 @@ function pc_is_elementor($id) {
     return $doc && $doc->is_built_with_elementor();
 }
 
-/** Toutes les données d'un véhicule dans un tableau. */
+/** Toutes les données d'un véhicule (produit WooCommerce) dans un tableau. */
 function pc_car($id) {
     $m = function ($k, $d = '') use ($id) {
         $v = get_post_meta($id, 'pc_' . $k, true);
         return ($v === '' || $v === false) ? $d : $v;
     };
-    $gallery = array_values(array_filter(array_map('absint', explode(',', (string) $m('gallery')))));
+    $gallery = [];
+    if ($thumb = (int) get_post_thumbnail_id($id)) { $gallery[] = $thumb; }
+    foreach (explode(',', (string) get_post_meta($id, '_product_image_gallery', true)) as $g) { if ((int) $g) { $gallery[] = (int) $g; } }
     $options = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', (string) $m('options')))));
+    $price = (float) get_post_meta($id, '_price', true);
+    $regular = (float) get_post_meta($id, '_regular_price', true);
+    $sale = get_post_meta($id, '_sale_price', true);
     return [
         'id' => $id,
         'name' => get_the_title($id),
         'url' => get_permalink($id),
         'year' => (int) $m('year', 0),
-        'price' => (int) $m('price', 0),
-        'compare_at' => (int) $m('compare_at', 0),
+        'price' => (int) round($price),
+        'compare_at' => ($sale !== '' && $regular > $price) ? (int) round($regular) : 0,
         'km' => (int) $m('km', 0),
         'transmission' => $m('transmission'),
         'engine' => $m('engine'),
         'drivetrain' => $m('drivetrain'),
         'color' => $m('color'),
-        'stock' => $m('stock'),
+        'stock' => (string) get_post_meta($id, '_sku', true),
         'vin' => $m('vin'),
         'location' => $m('location', 'Granby'),
         'body' => $m('body', 'auto'),
         'reserved' => $m('reserved') === '1',
         'featured' => $m('featured') === '1',
         'options' => $options,
-        'gallery' => $gallery,
+        'gallery' => array_values(array_unique($gallery)),
     ];
 }
 
@@ -69,7 +75,7 @@ function pc_query_args($f = [], $per = -1, $order = 'recent') {
     $meta = [
         'relation' => 'AND',
         'pc_year_c' => ['key' => 'pc_year', 'type' => 'NUMERIC', 'compare' => 'EXISTS'],
-        'pc_price_c' => ['key' => 'pc_price', 'type' => 'NUMERIC', 'compare' => 'EXISTS'],
+        'pc_price_c' => ['key' => '_price', 'type' => 'NUMERIC', 'compare' => 'EXISTS'],
         'pc_km_c' => ['key' => 'pc_km', 'type' => 'NUMERIC', 'compare' => 'EXISTS'],
         'pc_feat_c' => ['key' => 'pc_featured', 'compare' => 'EXISTS'],
     ];
@@ -78,8 +84,8 @@ function pc_query_args($f = [], $per = -1, $order = 'recent') {
     if ($type === 'auto') { $meta[] = ['key' => 'pc_body', 'value' => ['auto', 'coupe'], 'compare' => 'IN']; }
     if ($type === 'awd') { $meta[] = ['key' => 'pc_drivetrain', 'value' => 'AWD|4x4', 'compare' => 'REGEXP']; }
     if (!empty($f['succursale'])) { $meta[] = ['key' => 'pc_location', 'value' => $f['succursale']]; }
-    if (!empty($f['prix'])) { $meta[] = ['key' => 'pc_price', 'value' => (int) $f['prix'], 'type' => 'NUMERIC', 'compare' => '<=']; }
-    if (!empty($f['prix_lt'])) { $meta[] = ['key' => 'pc_price', 'value' => (int) $f['prix_lt'], 'type' => 'NUMERIC', 'compare' => '<']; }
+    if (!empty($f['prix'])) { $meta[] = ['key' => '_price', 'value' => (int) $f['prix'], 'type' => 'NUMERIC', 'compare' => '<=']; }
+    if (!empty($f['prix_lt'])) { $meta[] = ['key' => '_price', 'value' => (int) $f['prix_lt'], 'type' => 'NUMERIC', 'compare' => '<']; }
 
     $words = [];
     foreach (preg_split('/\s+/', trim((string) ($f['q'] ?? ''))) as $w) {
@@ -96,7 +102,7 @@ function pc_query_args($f = [], $per = -1, $order = 'recent') {
         'home' => ['pc_feat_c' => 'DESC', 'pc_year_c' => 'DESC', 'ID' => 'DESC'],
     ];
     $args = [
-        'post_type' => 'vehicule', 'post_status' => 'publish', 'posts_per_page' => $per,
+        'post_type' => 'product', 'post_status' => 'publish', 'posts_per_page' => $per,
         'meta_query' => $meta, 'orderby' => $orders[$order] ?? $orders['recent'],
         'no_found_rows' => true, 'fields' => 'ids',
     ];

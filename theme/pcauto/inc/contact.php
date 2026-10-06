@@ -27,7 +27,7 @@ function pc_handle_contact() {
     if ($nom === '' || strlen(preg_replace('/\D/', '', $tel)) < 10 || !is_email($mail)) { $go('erreur'); }
 
     $lines = ['Bonjour PC Auto,', '', "Nom : $nom", "Téléphone : $tel", "Courriel : $mail"];
-    if ($vid && get_post_type($vid) === 'vehicule') {
+    if ($vid && get_post_type($vid) === 'product' && pc_is_vehicle($vid)) {
         $c = pc_car($vid);
         $lines[] = 'Véhicule : ' . $c['name'] . ' ' . $c['year'] . ' (stock ' . $c['stock'] . ', ' . html_entity_decode(pc_price($c['price'])) . ') ' . get_permalink($vid);
     }

@@ -11,6 +11,13 @@ add_action('customize_register', function ($wp) {
         'description' => 'Nombre affiché sur la carte « Bientôt en inventaire ». 0 la masque.',
     ]);
 
+    $wp->add_setting('pc_online_purchase', ['default' => false, 'sanitize_callback' => 'rest_sanitize_boolean']);
+    $wp->add_control('pc_online_purchase', [
+        'section' => 'pc_options', 'type' => 'checkbox',
+        'label' => 'Permettre l’achat en ligne des véhicules (panier WooCommerce)',
+        'description' => 'Désactivé par défaut : les véhicules affichent leur prix et invitent à nous contacter.',
+    ]);
+
     $wp->add_setting('pc_contact_email', ['default' => '', 'sanitize_callback' => 'sanitize_email']);
     $wp->add_control('pc_contact_email', [
         'section' => 'pc_options', 'type' => 'email',

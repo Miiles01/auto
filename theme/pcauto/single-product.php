@@ -1,5 +1,9 @@
 <?php
+/** Fiche produit : véhicule (gabarit PC Auto) ou produit ordinaire (gabarit WooCommerce). */
 get_header();
+if (!pc_is_vehicle(get_queried_object_id())) : ?>
+<main id="contenu" class="pc-page pc-page--default pc-shop"><div class="container"><?php woocommerce_content(); ?></div></main>
+<?php get_footer(); return; endif;
 while (have_posts()) : the_post();
 $c = pc_car(get_the_ID());
 $full = $c['name'] . ' ' . $c['year'];

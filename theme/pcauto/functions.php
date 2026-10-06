@@ -5,7 +5,7 @@
 if (!defined('ABSPATH')) { exit; }
 
 require get_theme_file_path('inc/helpers.php');
-require get_theme_file_path('inc/cpt.php');
+require get_theme_file_path('inc/product-fields.php');
 require get_theme_file_path('inc/contact.php');
 require get_theme_file_path('inc/customizer.php');
 
@@ -32,7 +32,7 @@ add_action('wp_enqueue_scripts', function () {
 
 /* Titre des fiches véhicule : « Kia Sorento 2013 à Granby — 9 995 $ » */
 add_filter('document_title_parts', function ($parts) {
-    if (is_singular('vehicule')) {
+    if (is_singular('product') && pc_is_vehicle(get_the_ID())) {
         $c = pc_car(get_the_ID());
         $parts['title'] = $c['name'] . ' ' . $c['year'] . ' à ' . $c['location'] . ' — ' . pc_price($c['price']);
     }
@@ -41,6 +41,5 @@ add_filter('document_title_parts', function ($parts) {
 
 /* À l'activation : permaliens propres */
 add_action('after_switch_theme', function () {
-    pc_register_cpt();
     flush_rewrite_rules();
 });
