@@ -97,3 +97,8 @@ Requires PHP: 7.4
 
 @media (max-width: 1024px) { .post-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .post-grid { grid-template-columns: 1fr; } .entry { font-size: 1.0625rem; } }
+
+/* Mode catalogue : aviso « consultez la succursale » */
+.pc-consult { background: var(--bg-raised); border-left: 4px solid var(--accent); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin: 0 0 2rem; display: grid; gap: 0.875rem; }
+.pc-consult p { margin: 0; }
+.pc-consult__links { display: flex; flex-wrap: wrap; gap: 0.625rem; }

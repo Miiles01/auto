@@ -240,3 +240,20 @@ function pc_post_card($id = null) {
 <?php
     return ob_get_clean();
 }
+
+/** Aviso « consultez la succursale » (boutique en mode catalogue : aucun achat en ligne). */
+function pc_consult_notice($branch_name = '') {
+    $one = $branch_name ? pc_branch_by_name($branch_name) : null;
+    ob_start(); ?>
+<div class="pc-consult woocommerce-info" role="status">
+  <p><strong>Les achats ne se font pas en ligne.</strong> <?php echo $one ? 'Consultez la succursale de ' . esc_html($one['name']) . ' :' : 'Consultez la succursale de votre choix :'; ?></p>
+  <p class="pc-consult__links">
+    <?php foreach (pc_branches() as $b) : if ($one && $b['key'] !== $one['key']) { continue; } ?>
+      <a class="btn btn--red" href="<?php echo esc_url($b['url']); ?>">Succursale de <?php echo esc_html($b['name']); ?></a>
+    <?php endforeach; ?>
+    <a class="btn" href="tel:+14503780888">450 378-0888</a>
+  </p>
+</div>
+<?php
+    return ob_get_clean();
+}

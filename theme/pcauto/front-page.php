@@ -268,6 +268,7 @@ if (pc_is_elementor($pc_front_id)) : ?>
         <!-- (11) Succursales -->
         <section class="section" id="succursales" aria-labelledby="loc-title">
           <div class="container">
+            <?php if (isset($_GET['achat'])) { echo pc_consult_notice(); } ?>
             <div class="section-head">
               <div>
                 <p class="eyebrow" style="margin-bottom:1rem">(09) — Succursales</p>

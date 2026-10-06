@@ -64,8 +64,26 @@ add_action('woocommerce_product_query', function ($q) {
     $q->set('meta_query', $meta);
 });
 
-/* Les véhicules ne s'achètent pas en ligne, sauf si le réglage du thème l'autorise. */
-add_filter('woocommerce_is_purchasable', function ($ok, $product) {
-    if (get_post_meta($product->get_id(), 'pc_year', true) !== '' && !get_theme_mod('pc_online_purchase', false)) { return false; }
-    return $ok;
+/* ---- Mode catalogue : on voit les produits et leur prix, on ne peut rien acheter en ligne ---- */
+add_filter('woocommerce_is_purchasable', '__return_false');
+
+// Bouton des listes (boutique, catégories) : renvoie vers la succursale concernée
+add_filter('woocommerce_loop_add_to_cart_link', function ($html, $product) {
+    $b = pc_branch_by_name((string) get_post_meta($product->get_id(), 'pc_location', true));
+    return '<a class="button" href="' . esc_url($b ? $b['url'] : home_url('/?achat=consulter#succursales')) . '">Consulter la succursale</a>';
 }, 10, 2);
+
+// Fiche d'un produit ordinaire (non véhicule) : aviso à la place du bouton d'achat
+add_action('woocommerce_single_product_summary', function () {
+    global $product;
+    if ($product && !pc_is_vehicle($product->get_id())) { echo pc_consult_notice(); }
+}, 30);
+
+// Panier, caisse et compte client : on renvoie le visiteur vers les succursales avec l'aviso
+add_action('template_redirect', function () {
+    if (!function_exists('is_cart') || current_user_can('manage_options')) { return; }
+    if (is_cart() || is_checkout() || is_account_page()) {
+        wp_safe_redirect(home_url('/?achat=consulter#succursales'));
+        exit;
+    }
+});
