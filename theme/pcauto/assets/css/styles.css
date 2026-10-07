@@ -571,8 +571,8 @@ body:has(.mobile-menu:target) .site-header .brand img { filter: brightness(0) in
 /* -- Pied de page (rouge) ------------------------------------------------------ */
 .footer { background: var(--accent); color: var(--on-accent); padding-top: clamp(4rem, 8vw, 6.5rem); overflow: hidden; }
 .footer__top { display: grid; grid-template-columns: minmax(0, 6fr) repeat(3, minmax(0, 2fr)); gap: 2.5rem var(--gutter); }
-.footer__cta h2 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(2.25rem, 3.6vw, 3rem); line-height: 1.02; margin-bottom: 1.75rem; }
-.footer__col h3 { font-family: var(--font-serif); font-weight: 400; font-size: 1.0625rem; opacity: 0.75; margin-bottom: 1rem; }
+.footer__cta h2, .footer__cta .footer__h2 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(2.25rem, 3.6vw, 3rem); line-height: 1.02; margin-bottom: 1.75rem; }
+.footer__col h3, .footer__col .footer__h3 { font-family: var(--font-serif); font-weight: 400; font-size: 1.0625rem; opacity: 0.75; margin-bottom: 1rem; }
 .footer__col li + li { margin-top: 0.5rem; }
 .footer__col a { font-size: 0.9375rem; }
 .footer__legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem 2rem; margin-top: clamp(3rem, 6vw, 5rem); padding-top: 1.25rem; border-top: 1px solid rgba(255,255,255,.4); font-size: 0.8125rem; }
@@ -732,7 +732,7 @@ body:has(.mobile-menu:target) .site-header .brand img { filter: brightness(0) in
   .hotspot__card { display: none; }
   .inspect__list { display: grid; gap: 0; margin-top: 1.5rem; }
   .inspect__list li { display: grid; grid-template-columns: 2rem 1fr; gap: 0.75rem; padding-block: 1rem; border-top: 1px solid var(--rule); }
-  .inspect__list b { font-family: var(--font-serif); font-weight: 400; font-size: 1.25rem; display: block; }
+  .inspect__list b, .inspect__list h3 { font-family: var(--font-serif); font-weight: 400; font-size: 1.25rem; display: block; }
   .inspect__list span { font-size: 0.9375rem; color: var(--fg-muted); }
   .inspect__list i { font-style: normal; font-family: var(--font-serif); color: var(--accent-strong); }
   .hotspot__dot { width: 2.25rem; height: 2.25rem; font-family: var(--font-serif); font-size: 0.9375rem; }
@@ -768,6 +768,6 @@ body:has(.mobile-menu:target) .site-header .brand img { filter: brightness(0) in
 }
 
 /* Helvetica : interlettrage resserré pour les grands corps */
-.manifesto__text, .footer__cta h2, .vd__subhead, .panel h2, .location__addr, .hotspot__card strong, .vd-missing h1, .inv-empty p { letter-spacing: -0.03em; }
+.manifesto__text, .footer__cta h2, .footer__cta .footer__h2, .vd__subhead, .panel h2, .location__addr, .hotspot__card strong, .vd-missing h1, .inv-empty p { letter-spacing: -0.03em; }
 .car-card__title, .service__title, .location__name, .vd__price b, .car-card__price, .calc__result b, .finance__badge b, .link-bracket { letter-spacing: -0.03em; }
 .nav a, .header-utils a:not(.btn) { font-weight: 500; font-size: 1rem; }

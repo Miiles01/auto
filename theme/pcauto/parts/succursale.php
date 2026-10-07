@@ -109,7 +109,7 @@ $base = get_permalink();
       <div class="section-head">
         <div>
           <p class="eyebrow" style="margin-bottom:1rem">(03) — Nous rendre visite</p>
-          <h2 class="h-section" id="visit-title">PC Auto <em><?php echo esc_html($name); ?></em></h2>
+          <h2 class="h-section" id="visit-title">Nous rendre visite <em>à <?php echo esc_html($name); ?></em></h2>
         </div>
         <p class="section-head__note">Appelez avant de passer : nous préparons le véhicule qui vous intéresse pour votre essai routier.</p>
       </div>

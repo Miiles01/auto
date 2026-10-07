@@ -28,6 +28,7 @@ $current = is_category() ? get_queried_object_id() : 0;
       <?php endif; ?>
 
       <?php if (have_posts()) : ?>
+        <h2 class="sr-only"><?php echo $is_blog ? 'Tous les articles' : esc_html($title); ?></h2>
         <div class="post-grid">
           <?php while (have_posts()) : the_post(); echo pc_post_card(get_the_ID()); endwhile; ?>
         </div>

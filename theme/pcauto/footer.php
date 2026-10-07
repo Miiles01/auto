@@ -2,11 +2,11 @@
         <div class="container">
           <div class="footer__top">
             <div class="footer__cta">
-              <h2>Votre prochain véhicule<br>vous attend</h2>
+              <p class="footer__h2">Votre prochain véhicule<br>vous attend</p>
               <a class="btn btn--light btn--lg" href="<?php echo esc_url(pc_inv_url('')); ?>">Voir l'inventaire <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             </div>
             <div class="footer__col">
-              <h3>Explorer</h3>
+              <p class="footer__h3">Explorer</p>
               <ul>
                 <li><a class="link-underline" href="<?php echo esc_url(pc_inv_url('')); ?>">Inventaire</a></li>
                 <li><a class="link-underline" href="<?php echo esc_url(pc_inv_url('?type=vus')); ?>">VUS</a></li>
@@ -15,7 +15,7 @@
               </ul>
             </div>
             <div class="footer__col">
-              <h3>Services</h3>
+              <p class="footer__h3">Services</p>
               <ul>
                 <li><a class="link-underline" href="<?php echo esc_url(pc_url('financement')); ?>">Financement</a></li>
                 <li><a class="link-underline" href="<?php echo esc_url(pc_url('vendre')); ?>">Vendre mon auto</a></li>
@@ -24,7 +24,7 @@
               </ul>
             </div>
             <div class="footer__col">
-              <h3>Nous joindre</h3>
+              <p class="footer__h3">Nous joindre</p>
               <ul>
                 <li><a class="link-underline" href="tel:+14503780888">450 378-0888</a></li>
                 <li><a class="link-underline" href="https://api.whatsapp.com/send?phone=14503780888&amp;text=" target="_blank" rel="noopener">WhatsApp</a></li>

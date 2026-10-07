@@ -148,7 +148,7 @@ function pc_card($id, $i = 0) {
     <?php echo pc_img($first, 'pc-card', $c['name'] . ' ' . $c['year'] . ', vue avant'); ?>
     <?php echo $second ? pc_img($second, 'pc-card', '') : ''; ?>
   </div>
-  <h3 class="car-card__title"><a class="car-card__link" href="<?php echo esc_url($c['url']); ?>"><?php echo esc_html($c['name']); ?> <span><?php echo (int) $c['year']; ?></span></a></h3>
+  <p class="car-card__title"><a class="car-card__link" href="<?php echo esc_url($c['url']); ?>"><?php echo esc_html($c['name']); ?> <span><?php echo (int) $c['year']; ?></span></a></p>
   <p class="car-card__spec"><?php echo esc_html(pc_km($c['km']) . ' · ' . $c['transmission'] . ' · ' . $c['drivetrain']); ?></p>
   <div class="car-card__foot"><span class="car-card__price"><span><?php echo pc_price($c['price']); ?></span><?php if ($reduced) : ?> <s class="car-card__was"><span><?php echo pc_price($c['compare_at']); ?></span></s><?php endif; ?></span><span class="car-card__more">Détails <?php echo pc_icon('arrow'); ?></span></div>
 </article>
@@ -162,7 +162,7 @@ function pc_soon_card() {
     ob_start(); ?>
 <article class="car-card car-card--soon">
   <div class="car-card__media"><img src="<?php echo esc_url(get_theme_file_uri('assets/img/en-preparation.webp')); ?>" alt="Véhicule sous une housse, en préparation" width="474" height="266" loading="lazy"><span class="soon-label">Bientôt en inventaire</span></div>
-  <h3 class="car-card__title"><?php echo $prep . ($prep > 1 ? ' véhicules' : ' véhicule'); ?> <span>en préparation</span></h3>
+  <p class="car-card__title"><?php echo $prep . ($prep > 1 ? ' véhicules' : ' véhicule'); ?> <span>en préparation</span></p>
   <p class="car-card__spec">Inspection et esthétique en cours. Écrivez-nous pour être le premier informé.</p>
   <div class="car-card__foot"><a class="car-card__more car-card__link" href="<?php echo esc_url(pc_wa("Bonjour PC Auto, j'aimerais être informé(e) des prochains véhicules disponibles.")); ?>" target="_blank" rel="noopener">M’aviser <?php echo pc_icon('arrow'); ?></a></div>
 </article>

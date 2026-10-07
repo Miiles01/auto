@@ -32,11 +32,11 @@
               </div>
             </div>
             <ol class="inspect__list">
-              <li><i>01</i><div><b>Moteur et transmission</b><span>Démarrage, fuites, niveaux et passage des vitesses vérifiés sur la route.</span></div></li>
-              <li><i>02</i><div><b>Freins et pneus</b><span>Freins ABS, usure des pneus, suspension et direction.</span></div></li>
-              <li><i>03</i><div><b>Habitacle</b><span>Climatisation, sièges chauffants, caméra de recul, Bluetooth et commandes au volant.</span></div></li>
-              <li><i>04</i><div><b>Carrosserie et historique</b><span>État de la carrosserie et numéro de série (NIV) affiché sur chaque fiche.</span></div></li>
-              <li><i>05</i><div><b>Motricité 4x4 et intégrale</b><span>Engagement du 4x4 ou de la traction intégrale testé avant la vente.</span></div></li>
+              <li><i>01</i><div><h3>Moteur et transmission</h3><span>Démarrage, fuites, niveaux et passage des vitesses vérifiés sur la route.</span></div></li>
+              <li><i>02</i><div><h3>Freins et pneus</h3><span>Freins ABS, usure des pneus, suspension et direction.</span></div></li>
+              <li><i>03</i><div><h3>Habitacle</h3><span>Climatisation, sièges chauffants, caméra de recul, Bluetooth et commandes au volant.</span></div></li>
+              <li><i>04</i><div><h3>Carrosserie et historique</h3><span>État de la carrosserie et numéro de série (NIV) affiché sur chaque fiche.</span></div></li>
+              <li><i>05</i><div><h3>Motricité 4x4 et intégrale</h3><span>Engagement du 4x4 ou de la traction intégrale testé avant la vente.</span></div></li>
             </ol>
           </div>
         </section>

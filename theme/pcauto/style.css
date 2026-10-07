@@ -144,7 +144,7 @@ Requires PHP: 7.4
 .manifesto__h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.25rem, 5vw, 4rem); line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 2rem; }
 .reasons { list-style: none; padding: 0; margin: clamp(2.5rem, 5vw, 4rem) 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); text-align: left; border-top: 1px solid rgba(255, 255, 255, 0.4); padding-top: 1.5rem; }
 .reasons li { display: grid; gap: 0.375rem; }
-.reasons b { font-family: var(--font-display); font-size: 1.5rem; line-height: 1; letter-spacing: -0.03em; }
+.reasons b, .reasons h3 { font-family: var(--font-display); font-size: 1.5rem; line-height: 1; letter-spacing: -0.03em; }
 .reasons span { opacity: 0.9; font-size: 0.9375rem; line-height: 1.45; }
 
 @media (max-width: 1024px) {
@@ -156,3 +156,7 @@ Requires PHP: 7.4
   .page-hero h1.page-h1 { max-width: none; }
   .table-wrap table { min-width: 30rem; }
 }
+
+.footer__h2 { display: block; }
+.footer__h3 { display: block; }
+.car-card__title { margin: 0; }

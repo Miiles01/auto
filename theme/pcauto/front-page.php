@@ -108,9 +108,9 @@ if (pc_is_elementor($pc_front_id)) : ?>
               jusqu'aux clés.
             </p>
             <ul class="reasons">
-              <li><b>Service en quatre langues</b><span>Français, anglais, espagnol et portugais, à Granby comme à Sainte-Eulalie.</span></li>
-              <li><b>Inspection avant la vente</b><span>Moteur, freins, pneus, habitacle et carrosserie vérifiés avant la mise en vente.</span></li>
-              <li><b>Financement à la succursale</b><span>Financement directement chez nous, sans aller-retour entre la banque et le concessionnaire.</span></li>
+              <li><h3>Service en quatre langues</h3><span>Français, anglais, espagnol et portugais, à Granby comme à Sainte-Eulalie.</span></li>
+              <li><h3>Inspection avant la vente</h3><span>Moteur, freins, pneus, habitacle et carrosserie vérifiés avant la mise en vente.</span></li>
+              <li><h3>Financement à la succursale</h3><span>Financement directement chez nous, sans aller-retour entre la banque et le concessionnaire.</span></li>
             </ul>
           </div>
         </section>
