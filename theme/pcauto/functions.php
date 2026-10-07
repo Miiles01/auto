@@ -8,6 +8,8 @@ require get_theme_file_path('inc/helpers.php');
 require get_theme_file_path('inc/product-fields.php');
 require get_theme_file_path('inc/contact.php');
 require get_theme_file_path('inc/customizer.php');
+require get_theme_file_path('inc/testimonials.php');
+require get_theme_file_path('inc/seo.php');
 
 add_action('after_setup_theme', function () {
     add_theme_support('title-tag');
@@ -43,3 +45,13 @@ add_filter('document_title_parts', function ($parts) {
 add_action('after_switch_theme', function () {
     flush_rewrite_rules();
 });
+
+/* Ancienne adresse /inventaire/ → nouvelle page « Acheter une auto usagée » (redirection permanente) */
+add_action('template_redirect', function () {
+    $path = trim((string) wp_parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH), '/');
+    if ($path === 'inventaire') {
+        $qs = $_SERVER['QUERY_STRING'] ?? '';
+        wp_safe_redirect(pc_inv_url($qs ? '?' . $qs : ''), 301);
+        exit;
+    }
+}, 1);

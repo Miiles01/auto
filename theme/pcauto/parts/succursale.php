@@ -36,8 +36,8 @@ $base = get_permalink();
   <section class="hero hero--branch" aria-labelledby="hero-title">
     <div class="hero__media" aria-hidden="true" style="background-image:url('<?php echo esc_url($hero_url); ?>')"><span class="hero__overlay"></span></div>
     <div class="container hero__inner">
-      <p class="hero__eyebrow">Succursale · véhicules d’occasion</p>
-      <h1 class="hero__title display" id="hero-title"><span class="hero__line"><span>PC Auto</span></span><span class="hero__line"><span><?php echo esc_html($name); ?></span></span></h1>
+      <h1 class="hero__kicker" id="hero-title">Concessionnaire d’autos usagées à <?php echo esc_html($name); ?></h1>
+      <p class="hero__title display"><span class="hero__line"><span>PC Auto</span></span><span class="hero__line"><span><?php echo esc_html($name); ?></span></span></p>
       <p class="hero__lead">Les véhicules de notre succursale de <?php echo esc_html($name); ?> sont inspectés, garantis et financés sur place. Passez nous voir au <?php echo esc_html($b['street']); ?> ou appelez avant de venir : nous préparons votre essai routier.</p>
       <div class="hero__actions">
         <a class="btn btn--red btn--lg" href="#inventaire">Voir les <?php echo count($all); ?> véhicules <?php echo pc_icon('arrow'); ?></a>
@@ -57,7 +57,7 @@ $base = get_permalink();
       <div class="section-head">
         <div>
           <p class="eyebrow" style="margin-bottom:1rem">(01) — Inventaire de <?php echo esc_html($name); ?></p>
-          <h2 class="h-section" id="inv-title">Disponibles <em>à <?php echo esc_html($name); ?></em></h2>
+          <h2 class="h-section" id="inv-title">Autos usagées à vendre <em>à <?php echo esc_html($name); ?></em></h2>
         </div>
         <p class="section-head__note">Tous nos prix sont affichés. Chaque véhicule ci-dessous se trouve à la succursale de <?php echo esc_html($name); ?>.</p>
       </div>
@@ -82,30 +82,23 @@ $base = get_permalink();
     </div>
   </section>
 
-  <!-- (03) Financement -->
-  <section class="section section--dark" id="financement" aria-labelledby="finance-title">
+  <!-- Parcourir par catégorie + inspection (déplacés depuis l'accueil) -->
+  <?php get_template_part('parts/section-browse', null, ['branch' => $name]); ?>
+  <?php get_template_part('parts/section-inspection'); ?>
+
+  <!-- Financement : teaser vers la page dédiée -->
+  <section class="section section--dark section--tight" aria-labelledby="fin-title">
     <div class="container">
-      <div class="section-head section-head--dark">
-        <p class="eyebrow">(02) — Financement</p>
-        <p class="section-head__note">Financement directement chez nous, à <?php echo esc_html($name); ?> : pas d’aller-retour entre la banque et le concessionnaire.</p>
-      </div>
       <div class="finance">
         <div>
-          <h2 class="finance__title display" id="finance-title">Financement <em>approuvé rapidement</em></h2>
-          <ul class="finance__list">
-            <li><?php echo pc_icon('check'); ?>Obtenez un financement directement avec nous.</li>
-            <li><?php echo pc_icon('check'); ?>Choisissez le terme qui convient le mieux à vos besoins.</li>
-            <li><?php echo pc_icon('check'); ?>Nous achetons aussi votre véhicule, avec ou sans échange.</li>
-          </ul>
-          <div class="finance__actions">
-            <a class="btn btn--red btn--lg" href="#contact">Demander des informations <?php echo pc_icon('arrow'); ?></a>
-            <a class="btn btn--ghost-light btn--lg" href="tel:+14503780888"><?php echo pc_icon('phone'); ?>450 378-0888</a>
-          </div>
+          <p class="eyebrow" style="margin-bottom:1rem">Financement</p>
+          <h2 class="h-section" id="fin-title">Financement auto usagé <em>à <?php echo esc_html($name); ?></em></h2>
+          <p style="margin-top:1rem;max-width:34rem;opacity:.85">Financez votre véhicule directement à la succursale de <?php echo esc_html($name); ?>, avec des démarches simples et rapides.</p>
         </div>
-        <figure class="finance__media">
-          <img src="<?php echo esc_url(get_theme_file_uri('assets/img/financement.webp')); ?>" alt="Un couple reçoit les clés de son véhicule après la signature" width="1800" height="1200" loading="lazy">
-          <figcaption class="finance__badge"><b>100 %</b><span>Financement approuvé, directement avec nous.</span></figcaption>
-        </figure>
+        <div class="finance__actions" style="justify-content:flex-end">
+          <a class="btn btn--red btn--lg" href="<?php echo esc_url(pc_url('financement')); ?>">Voir le financement auto usagé <?php echo pc_icon('arrow'); ?></a>
+          <a class="btn btn--ghost-light btn--lg" href="tel:+14503780888"><?php echo pc_icon('phone'); ?>450 378-0888</a>
+        </div>
       </div>
     </div>
   </section>
@@ -124,7 +117,7 @@ $base = get_permalink();
         <article class="location">
           <div class="location__map"><iframe title="Carte : PC Auto <?php echo esc_attr($name); ?>, <?php echo esc_attr($b['street']); ?>" src="<?php echo esc_url($map); ?>" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
           <div class="location__body">
-            <h3 class="location__name"><?php echo esc_html($name); ?></h3>
+            <h3 class="location__name">PC Auto <?php echo esc_html($name); ?></h3>
             <p class="location__addr"><?php echo esc_html($b['street']); ?><br><?php echo esc_html($b['city']); ?></p>
             <dl class="hours"><?php foreach ($b['hours'] as $h) : ?><dt><?php echo esc_html($h[0]); ?></dt><dd><?php echo esc_html($h[1]); ?></dd><?php endforeach; ?></dl>
             <div class="location__foot">

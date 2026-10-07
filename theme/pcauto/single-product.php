@@ -80,7 +80,7 @@ $near = array_slice($near, 0, 4);
                 <p class="eyebrow" style="margin-bottom:1rem">À voir aussi</p>
                 <h2 class="h-section" id="sim-title">Véhicules <em>similaires</em></h2>
               </div>
-              <p class="section-head__note"><a class="link-underline" href="<?php echo esc_url(home_url('/inventaire/')); ?>">Voir tout l'inventaire</a></p>
+              <p class="section-head__note"><a class="link-underline" href="<?php echo esc_url(pc_inv_url()); ?>">Voir tout l'inventaire</a></p>
             </div>
             <div class="car-grid">
               <?php foreach ($near as $i => $oid) { echo pc_card($oid, $i); } ?>

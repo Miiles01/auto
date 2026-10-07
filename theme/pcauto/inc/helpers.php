@@ -14,7 +14,13 @@ function pc_price($n) {
 }
 function pc_km($n) { return number_format((int) $n, 0, ',', "\u{00A0}") . ' km'; }
 function pc_wa($text = '') { return 'https://api.whatsapp.com/send?phone=' . PC_WA_PHONE . '&text=' . rawurlencode($text); }
-function pc_inv_url($qs = '') { return home_url('/inventaire/') . $qs; }
+function pc_url($key) {
+    $p = ['acheter' => '/acheter-une-auto-usagee/', 'vendre' => '/vendre-mon-auto/', 'financement' => '/financement-auto-usage/',
+          'apropos' => '/a-propos/', 'contact' => '/contact/', 'granby' => '/granby/', 'sainte-eulalie' => '/sainte-eulalie/'];
+    return $key === 'blog' ? pc_blog_url() : home_url($p[$key] ?? '/');
+}
+/** Page « Acheter » = inventaire complet. */
+function pc_inv_url($qs = '') { return pc_url('acheter') . $qs; }
 function pc_body_label($k) {
     $l = ['vus' => 'VUS', 'camion' => 'Camionnette', 'auto' => 'Berline et compacte', 'coupe' => 'Coupé sport'];
     return $l[$k] ?? '';
@@ -111,16 +117,20 @@ function pc_query_args($f = [], $per = -1, $order = 'recent') {
 }
 function pc_ids($f = [], $per = -1, $order = 'recent') { return get_posts(pc_query_args($f, $per, $order)); }
 
-/** Catégories de l'accueil (liste « Parcourir » et pastilles). */
-function pc_cats() {
-    return [
-        ['key' => 'all', 'label' => 'Tous les véhicules', 'href' => pc_inv_url(), 'f' => []],
-        ['key' => 'vus', 'label' => 'VUS', 'href' => pc_inv_url('?type=vus'), 'f' => ['type' => 'vus']],
-        ['key' => 'auto', 'label' => 'Berlines et compactes', 'href' => pc_inv_url('?type=auto'), 'f' => ['type' => 'auto']],
-        ['key' => 'camion', 'label' => 'Camionnettes', 'href' => pc_inv_url('?type=camion'), 'f' => ['type' => 'camion']],
-        ['key' => 'awd', 'label' => '4x4 et intégrale', 'href' => pc_inv_url('?type=awd'), 'f' => ['type' => 'awd']],
-        ['key' => 'budget', 'label' => 'Moins de 8 000 $', 'href' => pc_inv_url('?prix=8000'), 'f' => ['prix_lt' => 8000]],
+/** Catégories (liste « Parcourir » et pastilles). $branch = nom de succursale pour limiter à une succursale. */
+function pc_cats($branch = '') {
+    $b = $branch ? pc_branch_by_name($branch) : null;
+    $link = function ($type, $qs) use ($b) { return $b ? $b['url'] . ($type ? '?type=' . $type . '#inventaire' : '#inventaire') : pc_inv_url($qs); };
+    $cats = [
+        ['key' => 'all', 'label' => 'Tous les véhicules', 'href' => $link('', ''), 'f' => []],
+        ['key' => 'vus', 'label' => 'VUS', 'href' => $link('vus', '?type=vus'), 'f' => ['type' => 'vus']],
+        ['key' => 'auto', 'label' => 'Berlines et compactes', 'href' => $link('auto', '?type=auto'), 'f' => ['type' => 'auto']],
+        ['key' => 'camion', 'label' => 'Camionnettes', 'href' => $link('camion', '?type=camion'), 'f' => ['type' => 'camion']],
+        ['key' => 'awd', 'label' => '4x4 et intégrale', 'href' => $link('awd', '?type=awd'), 'f' => ['type' => 'awd']],
+        ['key' => 'budget', 'label' => 'Moins de 8 000 $', 'href' => pc_inv_url('?prix=8000' . ($b ? '&succursale=' . rawurlencode($branch) : '')), 'f' => ['prix_lt' => 8000]],
     ];
+    if ($branch) { foreach ($cats as &$c) { $c['f']['succursale'] = $branch; } unset($c); }
+    return $cats;
 }
 
 function pc_card($id, $i = 0) {
@@ -177,14 +187,14 @@ function pc_home_grid() {
     foreach (pc_ids([], 7, 'home') as $i => $id) { echo pc_card($id, $i); }
     echo pc_soon_card();
 }
-function pc_browse_list() {
-    foreach (pc_cats() as $c) {
+function pc_browse_list($branch = '') {
+    foreach (pc_cats($branch) as $c) {
         printf('<li><a href="%s">%s<sup>%d</sup></a></li>', esc_url($c['href']), esc_html($c['label']), count(pc_ids($c['f'])));
     }
 }
 /** side 0 = plaque gauche, 1 = plaque droite ; la catégorie n°2 est visible au repos. */
-function pc_browse_plate($side) {
-    foreach (pc_cats() as $i => $c) {
+function pc_browse_plate($side, $branch = '') {
+    foreach (pc_cats($branch) as $i => $c) {
         $ids = pc_ids($c['f'], 2, 'home');
         if (!$ids) { continue; }
         $car = pc_car($side === 0 ? $ids[0] : ($ids[1] ?? $ids[0]));
@@ -256,4 +266,24 @@ function pc_consult_notice($branch_name = '') {
 </div>
 <?php
     return ob_get_clean();
+}
+
+/** Bloc de questions fréquentes : chaque question est un H3 (structure demandée par le SEO). */
+function pc_faq($items) {
+    echo '<div class="faq">';
+    foreach ($items as $it) {
+        echo '<div class="faq__item"><h3>' . esc_html($it[0]) . '</h3><div class="faq__a">' . wp_kses_post($it[1]) . '</div></div>';
+    }
+    echo '</div>';
+}
+
+/** Phrase de résumé de l'inventaire : nombre, fourchette de prix, succursales. */
+function pc_inventory_summary() {
+    $ids = pc_ids();
+    if (!$ids) { return 'Nos véhicules sont à voir à Granby et à Sainte-Eulalie.'; }
+    $prices = array_filter(array_map(function ($id) { return (int) get_post_meta($id, '_price', true); }, $ids));
+    $n = count($ids);
+    $txt = $n . ' véhicules en inventaire';
+    if ($prices) { $txt .= ', de ' . pc_price(min($prices)) . ' à ' . pc_price(max($prices)); }
+    return html_entity_decode($txt . ', à voir à Granby et à Sainte-Eulalie.');
 }

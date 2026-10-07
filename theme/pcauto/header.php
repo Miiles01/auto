@@ -15,19 +15,21 @@
         <img src="<?php echo esc_url(get_theme_file_uri('assets/img/logo-pcauto.webp')); ?>" alt="PC Auto" width="480" height="417">
       </a>
       <nav class="nav" aria-label="Navigation principale">
+        <a href="<?php echo esc_url(pc_url('acheter')); ?>">Acheter</a>
+        <a href="<?php echo esc_url(pc_url('vendre')); ?>">Vendre</a>
+        <a href="<?php echo esc_url(pc_url('financement')); ?>">Financement</a>
         <div class="nav__drop">
-          <a href="<?php echo esc_url(home_url('/#succursales')); ?>" aria-haspopup="true">Succursales</a>
+          <a href="<?php echo esc_url(pc_url('contact')); ?>" aria-haspopup="true">Succursales</a>
           <div class="nav__menu">
             <?php foreach (pc_branches() as $b) : ?><a href="<?php echo esc_url($b['url']); ?>"><b><?php echo esc_html($b['name']); ?></b><span><?php echo esc_html($b['street']); ?></span></a><?php endforeach; ?>
           </div>
         </div>
-        <a href="<?php echo esc_url(home_url('/#financement')); ?>">Financement</a>
-        <a href="<?php echo esc_url(home_url('/#services')); ?>">Services</a>
-        <a href="<?php echo esc_url(pc_blog_url()); ?>">Blog</a>
+        <a href="<?php echo esc_url(pc_url('apropos')); ?>">À propos</a>
+        <a href="<?php echo esc_url(pc_url('contact')); ?>">Contact</a>
       </nav>
       <div class="header-utils">
         <a class="tel" href="tel:+14503780888"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span>450 378-0888</span></a>
-        <a class="btn btn--red" href="<?php echo esc_url(home_url('/inventaire/')); ?>">Voir l'inventaire</a>
+        <a class="btn btn--red" href="<?php echo esc_url(pc_inv_url('')); ?>">Voir l’inventaire</a>
         <a class="menu-toggle" href="#mobile-menu" aria-label="Ouvrir le menu"><span></span></a>
       </div>
     </div>
@@ -36,11 +38,13 @@
   <div class="mobile-menu" id="mobile-menu">
     <a class="menu-toggle menu-toggle--close" href="#contenu" aria-label="Fermer le menu"><span></span></a>
     <nav aria-label="Navigation mobile">
-      <a href="<?php echo esc_url(home_url('/inventaire/')); ?>">Inventaire</a>
-      <a href="<?php echo esc_url(home_url('/granby/')); ?>">Granby</a>
-      <a href="<?php echo esc_url(home_url('/sainte-eulalie/')); ?>">Sainte-Eulalie</a>
-      <a href="<?php echo esc_url(home_url('/#financement')); ?>">Financement</a>
-      <a href="<?php echo esc_url(pc_blog_url()); ?>">Blog</a>
+      <a href="<?php echo esc_url(pc_url('acheter')); ?>">Acheter</a>
+      <a href="<?php echo esc_url(pc_url('vendre')); ?>">Vendre</a>
+      <a href="<?php echo esc_url(pc_url('financement')); ?>">Financement</a>
+      <a href="<?php echo esc_url(pc_url('granby')); ?>">Granby</a>
+      <a href="<?php echo esc_url(pc_url('sainte-eulalie')); ?>">Sainte-Eulalie</a>
+      <a href="<?php echo esc_url(pc_url('apropos')); ?>">À propos</a>
+      <a href="<?php echo esc_url(pc_url('contact')); ?>">Contact</a>
     </nav>
     <div class="mobile-menu__foot">
       <a class="btn btn--light btn--lg" href="tel:+14503780888"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Appeler le 450 378-0888</a>

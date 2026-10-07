@@ -21,6 +21,11 @@ function pc_handle_contact() {
     $sujet = sanitize_text_field(wp_unslash($_POST['sujet'] ?? ''));
     $msg = sanitize_textarea_field(wp_unslash($_POST['message'] ?? ''));
     $vid = absint($_POST['vehicule'] ?? 0);
+    $type = in_array($_POST['type'] ?? '', ['contact', 'vente', 'financement'], true) ? $_POST['type'] : 'contact';
+    $marque = sanitize_text_field(wp_unslash($_POST['marque'] ?? ''));
+    $modele = sanitize_text_field(wp_unslash($_POST['modele'] ?? ''));
+    $annee = absint($_POST['annee'] ?? 0);
+    $km = absint($_POST['km'] ?? 0);
     $suc = sanitize_text_field(wp_unslash($_POST['succursale'] ?? ''));
     if (!in_array($suc, ['Granby', 'Sainte-Eulalie'], true)) { $suc = ''; }
 
@@ -32,6 +37,7 @@ function pc_handle_contact() {
         $lines[] = 'Véhicule : ' . $c['name'] . ' ' . $c['year'] . ' (stock ' . $c['stock'] . ', ' . html_entity_decode(pc_price($c['price'])) . ') ' . get_permalink($vid);
     }
     if ($suc !== '') { $lines[] = "Succursale : $suc"; }
+    if ($type === 'vente') { $lines[] = "Véhicule à vendre : $marque $modele $annee, " . number_format($km, 0, ',', ' ') . ' km'; }
     if ($sujet !== '') { $lines[] = "Sujet : $sujet"; }
     if ($msg !== '') { $lines[] = ''; $lines[] = $msg; }
 

@@ -3,24 +3,24 @@
           <div class="footer__top">
             <div class="footer__cta">
               <h2>Votre prochain véhicule<br>vous attend</h2>
-              <a class="btn btn--light btn--lg" href="<?php echo esc_url(home_url('/inventaire/')); ?>">Voir l'inventaire <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+              <a class="btn btn--light btn--lg" href="<?php echo esc_url(pc_inv_url('')); ?>">Voir l'inventaire <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             </div>
             <div class="footer__col">
               <h3>Explorer</h3>
               <ul>
-                <li><a class="link-underline" href="<?php echo esc_url(home_url('/inventaire/')); ?>">Inventaire</a></li>
-                <li><a class="link-underline" href="<?php echo esc_url(home_url('/inventaire/?type=vus')); ?>">VUS</a></li>
-                <li><a class="link-underline" href="<?php echo esc_url(home_url('/inventaire/?type=auto')); ?>">Berlines et compactes</a></li>
-                <li><a class="link-underline" href="<?php echo esc_url(home_url('/inventaire/?type=camion')); ?>">Camionnettes</a></li>
+                <li><a class="link-underline" href="<?php echo esc_url(pc_inv_url('')); ?>">Inventaire</a></li>
+                <li><a class="link-underline" href="<?php echo esc_url(pc_inv_url('?type=vus')); ?>">VUS</a></li>
+                <li><a class="link-underline" href="<?php echo esc_url(pc_inv_url('?type=auto')); ?>">Berlines et compactes</a></li>
+                <li><a class="link-underline" href="<?php echo esc_url(pc_inv_url('?type=camion')); ?>">Camionnettes</a></li>
               </ul>
             </div>
             <div class="footer__col">
               <h3>Services</h3>
               <ul>
-                <li><a class="link-underline" href="<?php echo esc_url(home_url('/#financement')); ?>">Financement</a></li>
-                <li><a class="link-underline" href="<?php echo esc_url(home_url('/#services')); ?>">Nous achetons votre véhicule</a></li>
-                <li><a class="link-underline" href="<?php echo esc_url(home_url('/#services')); ?>">Garantie</a></li>
-                <li><a class="link-underline" href="<?php echo esc_url(home_url('/#contact')); ?>">Nous écrire</a></li>
+                <li><a class="link-underline" href="<?php echo esc_url(pc_url('financement')); ?>">Financement</a></li>
+                <li><a class="link-underline" href="<?php echo esc_url(pc_url('vendre')); ?>">Vendre mon auto</a></li>
+                <li><a class="link-underline" href="<?php echo esc_url(pc_url('acheter')); ?>">Acheter une auto usagée</a></li>
+                <li><a class="link-underline" href="<?php echo esc_url(pc_url('contact')); ?>">Nous écrire</a></li>
               </ul>
             </div>
             <div class="footer__col">
@@ -30,6 +30,7 @@
                 <li><a class="link-underline" href="https://api.whatsapp.com/send?phone=14503780888&amp;text=" target="_blank" rel="noopener">WhatsApp</a></li>
                 <li><a class="link-underline" href="<?php echo esc_url(home_url('/granby/')); ?>">Granby — 1297, rue Principale</a></li>
                 <li><a class="link-underline" href="<?php echo esc_url(home_url('/sainte-eulalie/')); ?>">Sainte-Eulalie — 315, rue des Bouleaux</a></li>
+                <li><a class="link-underline" href="<?php echo esc_url(pc_url('apropos')); ?>">À propos</a></li>
                 <li><a class="link-underline" href="<?php echo esc_url(pc_blog_url()); ?>">Blog</a></li>
               </ul>
             </div>
