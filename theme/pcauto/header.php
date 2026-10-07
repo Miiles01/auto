@@ -13,6 +13,7 @@
     <div class="site-header__inner">
       <a class="brand" href="<?php echo esc_url(home_url('/')); ?>" aria-label="PC Auto, accueil">
         <img src="<?php echo esc_url(get_theme_file_uri('assets/img/logo-pcauto.webp')); ?>" alt="PC Auto" width="480" height="417">
+        <img class="brand__alt" src="<?php echo esc_url(get_theme_file_uri('assets/img/logo-pcauto-light.webp')); ?>" alt="" width="480" height="417" aria-hidden="true">
       </a>
       <nav class="nav" aria-label="Navigation principale">
         <a href="<?php echo esc_url(pc_url('acheter')); ?>">Acheter</a>

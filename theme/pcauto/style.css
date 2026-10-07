@@ -160,3 +160,89 @@ Requires PHP: 7.4
 .footer__h2 { display: block; }
 .footer__h3 { display: block; }
 .car-card__title { margin: 0; }
+
+/* ==== Thèmes de couleur par page =========================================== */
+/* Le logo garde toujours ses couleurs : version « claire » (crème + rouge) sur fonds noirs. */
+.brand__alt { display: none; height: 3rem; width: auto; }
+
+/* Portée « noir » réutilisable : rouge et blanc ressortent bien sur ce fond */
+body.pc-theme-granby main > section:nth-of-type(even):not(.hero),
+body.pc-theme-granby .band,
+body.pc-theme-eulalie .band,
+body.pc-theme-eulalie .section--dark,
+body.pc-theme-about {
+  --bg: #14130f; --bg-raised: #1f1e19; --fg: #f4f2ed; --fg-muted: #aaa69b; --rule: #34322c;
+  --accent: #de0419; --accent-strong: #ff5a69; --on-accent: #fff; --on-dark: #f4f2ed; --rule-dark: rgba(244, 242, 237, 0.2);
+}
+body.pc-theme-granby main > section:nth-of-type(even):not(.hero),
+body.pc-theme-granby .band,
+body.pc-theme-eulalie .band,
+body.pc-theme-eulalie .section--dark { background: #14130f; color: #f4f2ed; }
+body.pc-theme-about { background: #0f0e0b; }
+
+/* -- Granby : rouge + noir ------------------------------------------------------------- */
+body.pc-theme-granby {
+  --bg: #de0419; --bg-raised: #c40316; --fg: #fff; --fg-muted: #fff;
+  --accent: #fff; --accent-strong: #fff; --on-accent: #de0419; --rule: rgba(255, 255, 255, 0.32);
+  --dark: #14130f; --dark-raised: #1f1e19; --on-dark: #fff; --rule-dark: rgba(255, 255, 255, 0.25);
+}
+body.pc-theme-granby .section--dark { background: #8f000f; color: #fff; }
+body.pc-theme-granby .site-header { background: rgba(20, 19, 15, 0.96); color: #f4f2ed; }
+body.pc-theme-granby .footer { background: #14130f; color: #f4f2ed; --on-accent: #f4f2ed; }
+body.pc-theme-granby .footer .btn--light { --btn-bg: #de0419; --btn-fg: #fff; }
+body.pc-theme-granby .location__map, body.pc-theme-granby .car-card__media { background: #a50212; }
+body.pc-theme-granby main > section:nth-of-type(even):not(.hero) .car-card__media,
+body.pc-theme-granby main > section:nth-of-type(even):not(.hero) .location__map { background: #26241f; }
+body.pc-theme-granby .field input, body.pc-theme-granby .field select, body.pc-theme-granby .field textarea { background-color: rgba(255, 255, 255, 0.14); color: #fff; border-color: rgba(255, 255, 255, 0.4); }
+body.pc-theme-granby .field input::placeholder { color: rgba(255, 255, 255, 0.7); }
+body.pc-theme-granby .field select option { color: #14130f; }
+body.pc-theme-granby main > section:nth-of-type(even):not(.hero) .field input,
+body.pc-theme-granby main > section:nth-of-type(even):not(.hero) .field select,
+body.pc-theme-granby main > section:nth-of-type(even):not(.hero) .field textarea { background-color: #1f1e19; color: #f4f2ed; border-color: #34322c; }
+body.pc-theme-granby .chip { background: rgba(20, 19, 15, 0.55); color: #fff; }
+body.pc-theme-granby .btn--wa { --btn-bg: #25d366; --btn-fg: #0b2e17; }
+
+/* -- Sainte-Eulalie : blanc + noir ---------------------------------------------------------- */
+body.pc-theme-eulalie { --bg: #fff; --bg-raised: #f5f4f1; --rule: #e6e4de; }
+body.pc-theme-eulalie .site-header { background: rgba(255, 255, 255, 0.96); }
+body.pc-theme-eulalie .band .branch-switch__title { color: #fff; }
+body.pc-theme-eulalie .footer { background: #14130f; color: #f4f2ed; --on-accent: #f4f2ed; }
+body.pc-theme-eulalie .footer .btn--light { --btn-bg: #de0419; --btn-fg: #fff; }
+body.pc-theme-eulalie .car-card__media, body.pc-theme-eulalie .location__map { background: #f0eeea; }
+
+/* -- À propos : noir ------------------------------------------------------------------------------ */
+body.pc-theme-about .site-header { background: rgba(15, 14, 11, 0.96); color: #f4f2ed; }
+body.pc-theme-about .site-header::after { opacity: 0.35; }
+body.pc-theme-about .location__map { background: #26241f; }
+body.pc-theme-about .location__map iframe { filter: grayscale(1) invert(0.9) contrast(0.9); }
+body.pc-theme-about .location:hover .location__map iframe { filter: none; }
+
+/* -- En-tête sombre (Granby, À propos) : logo clair, couleurs d'origine -------------------------- */
+body.pc-theme-granby .site-header .brand img:first-child,
+body.pc-theme-about .site-header .brand img:first-child { display: none; }
+body.pc-theme-granby .site-header .brand .brand__alt,
+body.pc-theme-about .site-header .brand .brand__alt { display: block; }
+body.pc-theme-granby .site-header .brand img, body.pc-theme-about .site-header .brand img { filter: none; }
+
+/* -- Menu mobile : fond noir sur les pages sombres (logo clair, sans filtre) ------------------- */
+body.pc-theme-granby .mobile-menu, body.pc-theme-about .mobile-menu { background: #14130f; color: #f4f2ed; }
+body.pc-theme-granby .mobile-menu .btn--light, body.pc-theme-about .mobile-menu .btn--light { --btn-bg: #de0419; --btn-fg: #fff; }
+body.pc-theme-granby:has(.mobile-menu:target) .site-header,
+body.pc-theme-about:has(.mobile-menu:target) .site-header { color: #f4f2ed; }
+body.pc-theme-granby:has(.mobile-menu:target) .site-header .brand img,
+body.pc-theme-about:has(.mobile-menu:target) .site-header .brand img { filter: none; }
+body.pc-theme-granby .menu-toggle--close, body.pc-theme-about .menu-toggle--close { color: #f4f2ed; }
+body.pc-theme-eulalie .mobile-menu .btn--light { --btn-bg: #fff; --btn-fg: #de0419; }
+
+/* Boutons sur les bandes noires : rouge plein, texte blanc */
+body.pc-theme-granby .band .btn--light, body.pc-theme-eulalie .band .btn--light { --btn-bg: #de0419; --btn-fg: #fff; --btn-hover: #fff; --btn-hover-fg: #de0419; }
+
+/* ==== Contraste (auditoría WCAG) =========================================== */
+.car-card__index { background: rgba(20, 19, 15, 0.62); color: #fff; padding: 0.125rem 0.5rem; border-radius: 999px; font-size: 0.8125rem; line-height: 1.4; text-shadow: none; }
+.footer__col .footer__h3 { opacity: 1; }
+body.pc-theme-about .footer .btn--light, body.pc-theme-granby .footer .btn--light, body.pc-theme-eulalie .footer .btn--light { --btn-bg: #f4f2ed; --btn-fg: #14130f; --btn-hover: #fff; --btn-hover-fg: #de0419; }
+body.pc-theme-granby .footer, body.pc-theme-eulalie .footer { --on-accent: #f4f2ed; }
+
+/* Texte rouge de marque sur fond clair : version plus foncée (≥ 4,5:1) ; plus de transparence sur les bandes rouges */
+.site-header { color: var(--accent-strong); }
+.band .eyebrow, .reasons span, .branch-switch__text { opacity: 1; }

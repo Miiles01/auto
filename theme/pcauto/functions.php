@@ -55,3 +55,13 @@ add_action('template_redirect', function () {
         exit;
     }
 }, 1);
+
+/* Tema de color por página : Granby = rouge, Sainte-Eulalie = blanc, À propos = noir */
+add_filter('body_class', function ($classes) {
+    if (is_page()) {
+        $map = ['granby' => 'pc-theme-granby', 'sainte-eulalie' => 'pc-theme-eulalie', 'a-propos' => 'pc-theme-about'];
+        $slug = get_post_field('post_name', get_queried_object_id());
+        if (isset($map[$slug])) { $classes[] = $map[$slug]; }
+    }
+    return $classes;
+});
